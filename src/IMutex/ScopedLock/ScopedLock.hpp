@@ -9,6 +9,10 @@
 #include "../IMutex.hpp"
 #include <memory>
 
+/**
+ * @brief ScopedLock class
+ * @details Lock and unlock a mutex at creation and destruction of the object
+*/
 class ScopedLock {
     public:
         ScopedLock(std::shared_ptr<IMutex> t_mutex);

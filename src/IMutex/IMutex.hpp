@@ -8,6 +8,10 @@
 #pragma once
 #include <mutex>
 
+/**
+ * @brief IMutex class
+ * @details Interface encapsulating a mutex
+*/
 class IMutex {
     public :
         virtual ~IMutex() = default;

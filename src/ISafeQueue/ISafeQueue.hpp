@@ -7,6 +7,10 @@
 
 #pragma once
 
+/**
+ * @brief ISafeQueue class
+ * @details Interface for a thread safe queue
+*/
 template <typename T>
 class ISafeQueue {
     public:

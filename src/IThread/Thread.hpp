@@ -9,6 +9,12 @@
 #include "IThread.hpp"
 #include <memory>
 
+/**
+ * @brief Thread class
+ * @details Thread class inheriting from IThread
+ * @tparam _Fp function pointer
+ * @tparam _Args arguments of the function
+*/
 template <class _Fp, class... _Args>
 class Thread : public IThread {
     public:

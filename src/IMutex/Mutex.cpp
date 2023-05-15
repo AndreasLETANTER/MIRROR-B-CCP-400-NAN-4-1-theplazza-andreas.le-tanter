@@ -7,24 +7,25 @@
 
 #include "Mutex.hpp"
 
-Mutex::Mutex()
-{
-}
-
-Mutex::~Mutex()
-{
-}
-
+/**
+ * @brief Lock the mutex
+*/
 void Mutex::lock()
 {
     _mutex.lock();
 }
 
+/**
+ * @brief Unlock the mutex
+*/
 void Mutex::unlock()
 {
     _mutex.unlock();
 }
 
+/**
+ * @brief Try to lock the mutex
+*/
 void Mutex::trylock()
 {
     _mutex.try_lock();

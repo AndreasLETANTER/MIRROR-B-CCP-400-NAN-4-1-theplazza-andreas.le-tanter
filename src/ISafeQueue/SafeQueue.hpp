@@ -14,6 +14,11 @@
 #include <memory>
 #include <condition_variable>
 
+/**
+ * @brief SafeQueue class
+ * @details Thread safe queue implementation inheriting from ISafeQueue
+ * @tparam T 
+*/
 template <typename T>
 class SafeQueue : public ISafeQueue<T> {
     public:

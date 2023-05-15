@@ -9,10 +9,14 @@
 #include "IMutex.hpp"
 #include <mutex>
 
+/**
+ * @brief Mutex class inheriting from IMutex
+ * @details Mutex encapsulating a std::mutex
+*/
 class Mutex : public IMutex {
     public:
-        Mutex();
-        ~Mutex();
+        Mutex() = default;
+        ~Mutex() = default;
         void lock() override;
         void unlock() override;
         void trylock() override;
