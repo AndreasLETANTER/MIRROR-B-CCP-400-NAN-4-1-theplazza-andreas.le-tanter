@@ -9,6 +9,9 @@
 #include <vector>
 #include "../Pizza/IPizza.hpp"
 
+/**
+ * @brief Interface for the kitchen class
+*/
 class IKitchen {
     public:
         virtual ~IKitchen() = 0;

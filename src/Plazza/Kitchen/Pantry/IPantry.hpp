@@ -8,6 +8,9 @@
 #pragma once
 #include "../Pizza/IPizza.hpp"
 
+/**
+ * @brief Interface for the pantry class
+*/
 class IPantry {
     public:
         virtual ~IPantry() = 0;
