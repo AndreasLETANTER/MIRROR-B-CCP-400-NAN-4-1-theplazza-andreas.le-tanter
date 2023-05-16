@@ -10,7 +10,7 @@
 
 class APizza : public IPizza {
     public:
-        virtual ~APizza() = 0;
+        ~APizza() = default;
         /**
          * @brief Get the type of pizza
          * @return the type of pizza
