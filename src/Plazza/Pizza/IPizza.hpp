@@ -53,7 +53,7 @@ enum PizzaIngredient
     Mushrooms = 5,
     Steak = 6,
     Eggplant = 7,
-    Goat = 8,
+    GoatCheese = 8,
     ChiefLove = 9
 };
 
