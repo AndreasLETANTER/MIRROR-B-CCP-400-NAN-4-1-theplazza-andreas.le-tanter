@@ -26,3 +26,8 @@ std::vector<PizzaIngredient> APizza::getIngredients() const
 {
     return m_ingredients;
 }
+
+void APizza::addIngredientToVector(PizzaIngredient t_ingredient)
+{
+    m_ingredients.push_back(t_ingredient);
+}

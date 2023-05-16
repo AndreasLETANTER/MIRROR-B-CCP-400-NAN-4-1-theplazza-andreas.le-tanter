@@ -33,6 +33,7 @@ class APizza : public IPizza {
         std::vector<PizzaIngredient> getIngredients() const override;
 
     protected:
+        void addIngredientToVector(PizzaIngredient t_ingredient);
         PizzaType m_type;
         PizzaSize m_size;
         PizzaCookingTime m_cookingTime;
