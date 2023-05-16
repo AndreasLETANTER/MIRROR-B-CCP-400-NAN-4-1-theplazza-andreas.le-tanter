@@ -14,6 +14,7 @@ set(SRC
     src/Plazza/Pizza/APizza.cpp
     src/Plazza/Pizza/Margarita/Margarita.cpp
     src/Plazza/Pizza/Regina/Regina.cpp
+    src/Plazza/Pizza/Americana/Americana.cpp
 )
 
 set(MAIN
