@@ -11,6 +11,12 @@
 class MargaritaPizza : public APizza {
     public:
         MargaritaPizza() = default;
+        /**
+         * @brief Construct a new Margarita Pizza object
+         * @details This constructor initialize the type, size, cooking time and ingredients of the pizza
+         * @param t_size The size of the pizza
+         * @return An instance of MargaritaPizza
+        */
         MargaritaPizza(PizzaSize t_size);
         ~MargaritaPizza() = default;
 
