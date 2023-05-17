@@ -42,7 +42,7 @@ std::vector<std::shared_ptr<IPizza>> Parser::getInput()
     std::string input;
     std::string inputParam;
     bool isInputAuthorized = false;
-    std::vector<std::unique_ptr<IPizza>> pizzas;
+    std::vector<std::shared_ptr<IPizza>> pizzas;
 
     std::getline(std::cin, input);
     for (int i = 0; i < (int)input.size(); i++) {
