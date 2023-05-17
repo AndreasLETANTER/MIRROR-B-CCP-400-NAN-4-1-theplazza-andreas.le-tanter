@@ -7,6 +7,12 @@
 
 #include "AmericanaPizza.hpp"
 
+/***
+ * @brief Construct a new Americana Pizza object
+ * @details This constructor initialize the type, size, cooking time and ingredients of the pizza
+ * @param t_size The size of the pizza
+ * @return An instance of AmericanaPizza
+*/
 AmericanaPizza::AmericanaPizza(PizzaSize t_size)
 {
     m_type = PizzaType::Americana;

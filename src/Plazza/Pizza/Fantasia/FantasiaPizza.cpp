@@ -7,6 +7,12 @@
 
 #include "FantasiaPizza.hpp"
 
+/**
+ * @brief Construct a new Fantasia Pizza object
+ * @details This constructor initialize the type, size, cooking time and ingredients of the pizza
+ * @param t_size The size of the pizza
+ * @return An instance of FantasiaPizza
+*/
 FantasiaPizza::FantasiaPizza(PizzaSize t_size)
 {
     m_type = PizzaType::Fantasia;

@@ -7,6 +7,12 @@
 
 #include "ReginaPizza.hpp"
 
+/**
+ * @brief Construct a new Regina Pizza object
+ * @details This constructor initialize the type, size, cooking time and ingredients of the pizza
+ * @param t_size The size of the pizza
+ * @return An instance of ReginaPizza
+*/
 ReginaPizza::ReginaPizza(PizzaSize t_size)
 {
     m_type = PizzaType::Regina;
