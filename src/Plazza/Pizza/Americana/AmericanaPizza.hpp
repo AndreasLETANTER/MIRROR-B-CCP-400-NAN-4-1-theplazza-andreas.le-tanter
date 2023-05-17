@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2023
 ** MIRROR-B-CCP-400-NAN-4-1-theplazza-andreas.le-tanter
 ** File description:
-** Americana
+** AmericanaPizza
 */
 
 #pragma once
 #include "../APizza.hpp"
 
-class Americana : public APizza {
+class AmericanaPizza : public APizza {
     public:
-        Americana() = default;
-        Americana(PizzaSize t_size);
-        ~Americana() = default;
+        AmericanaPizza() = default;
+        AmericanaPizza(PizzaSize t_size);
+        ~AmericanaPizza() = default;
 
     protected:
     private:

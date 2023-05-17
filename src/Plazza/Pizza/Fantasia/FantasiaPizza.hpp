@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2023
 ** MIRROR-B-CCP-400-NAN-4-1-theplazza-andreas.le-tanter
 ** File description:
-** Margarita
+** FantasiaPizza
 */
 
 #pragma once
 #include "../APizza.hpp"
 
-class Margarita : public APizza {
+class FantasiaPizza : public APizza {
     public:
-        Margarita() = default;
-        Margarita(PizzaSize t_size);
-        ~Margarita() = default;
+        FantasiaPizza() = default;
+        FantasiaPizza(PizzaSize t_size);
+        ~FantasiaPizza() = default;
 
     protected:
     private:

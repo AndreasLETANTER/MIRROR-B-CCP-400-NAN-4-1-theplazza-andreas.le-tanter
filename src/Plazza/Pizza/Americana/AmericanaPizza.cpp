@@ -2,19 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** MIRROR-B-CCP-400-NAN-4-1-theplazza-andreas.le-tanter
 ** File description:
-** Regina
+** AmericanaPizza
 */
 
-#include "Regina.hpp"
+#include "AmericanaPizza.hpp"
 
-Regina::Regina(PizzaSize t_size)
+AmericanaPizza::AmericanaPizza(PizzaSize t_size)
 {
-    m_type = PizzaType::Regina;
+    m_type = PizzaType::Americana;
     m_size = t_size;
     m_cookingTime = PizzaCookingTime::Two;
     addIngredientToVector(PizzaIngredient::Dough);
     addIngredientToVector(PizzaIngredient::Tomato);
     addIngredientToVector(PizzaIngredient::Gruyere);
-    addIngredientToVector(PizzaIngredient::Ham);
-    addIngredientToVector(PizzaIngredient::Mushrooms);
+    addIngredientToVector(PizzaIngredient::Steak);
 }
