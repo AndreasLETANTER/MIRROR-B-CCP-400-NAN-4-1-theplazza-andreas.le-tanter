@@ -8,12 +8,6 @@
 #include <iostream>
 #include <string>
 
-Parser::Parser(int ac, const char **av)
-{
-    for (int i = 1; i < ac; i++)
-        _args.push_back(av[i]);
-}
-
 std::string Parser::getInputString(std::string input, int *i)
 {
     std::string str;
