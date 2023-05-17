@@ -15,7 +15,7 @@ class APizza : public IPizza {
          * @brief Get the type of pizza
          * @return the type of pizza
         */
-       PizzaType getType() const override;
+        PizzaType getType() const override;
          /**
           * @brief Get the size of pizza
           * @return the size of pizza
