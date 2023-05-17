@@ -11,6 +11,7 @@ set(CXX_FLAGS -Wall -Wextra -Werror)
 set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
+    src/Plazza/Parser/Parser.cpp
 )
 
 set(MAIN
