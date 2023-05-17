@@ -32,4 +32,5 @@ bool Kitchen::isKitchenFilled()
 
 void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
 {
+    (void)t_pizza;
 }

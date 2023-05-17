@@ -14,7 +14,7 @@
 */
 class IKitchen {
     public:
-        virtual ~IKitchen() = 0;
+        virtual ~IKitchen() = default;
         /**
          * @brief Create a Cook object (thread that cook the pizza)
         */

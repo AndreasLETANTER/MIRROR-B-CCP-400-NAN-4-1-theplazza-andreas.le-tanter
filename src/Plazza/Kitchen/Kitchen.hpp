@@ -12,7 +12,7 @@
 class Kitchen : public IKitchen {
     public:
         Kitchen() = default;
-        ~Kitchen() = default;
+        ~Kitchen() override = default;
         void createCook() override;
         void createPantry() override;
         bool checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded) override;
