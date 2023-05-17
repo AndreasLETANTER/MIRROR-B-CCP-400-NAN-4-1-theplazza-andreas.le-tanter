@@ -14,12 +14,13 @@ Parser::Parser(int ac, const char **av)
         _args.push_back(av[i]);
 }
 
-std::string Parser::getInputString(std::string input, int i)
+std::string Parser::getInputString(std::string input, int *i)
 {
     std::string str;
+    int start = *i;
 
-    for (; input[i] != ' ' && i < (int)input.size(); i++)
-        str.push_back(input[i]);
+    for (; input[*i] != ' ' && input[*i] != ';' && *i < (int)input.size(); (*i)++);
+    str = input.substr(start, *i - start);
     return str;
 }
 
@@ -40,12 +41,17 @@ std::vector<std::unique_ptr<IPizza>> Parser::getInput()
 {
     std::string input;
     std::string inputParam;
+    bool isInputAuthorized = false;
     std::vector<std::unique_ptr<IPizza>> pizzas;
 
     std::getline(std::cin, input);
     for (int i = 0; i < (int)input.size(); i++) {
-        for (int j = 0; input[i] != ';' && i < (int)input.size(); i++, j++)
-            inputParam = getInputString(input, i);
+        while (input[i] != ';' && input[i] != ' ' && i < (int)input.size()) {
+            inputParam = getInputString(input, &i);
+            isInputAuthorized = isAuthorized(inputParam);
+            std::cout << "inputParam :" << inputParam << ", isInputAuthorized :" << isInputAuthorized << std::endl;
+            i++;
+        }
     }
     return pizzas;
 }
