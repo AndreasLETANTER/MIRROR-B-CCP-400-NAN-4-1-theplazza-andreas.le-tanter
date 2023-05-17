@@ -21,6 +21,7 @@ set(MAIN
 set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
+    tests/KitchenClass/PantryClass/Pantry.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
