@@ -39,7 +39,7 @@ class IKitchen {
          * @param t_pizza the pizza to add to the pool
          * @details this function add a pizza to the pool of the kitchen (the pool is a vector of pizza that the kitchen will cook)
         */
-        virtual void addKitchenToPool(std::unique_ptr<IPizza> t_pizza) = 0;
+        virtual void addPizzaToPool(std::shared_ptr<IPizza> t_pizza) = 0;
 
     protected:
     private:
