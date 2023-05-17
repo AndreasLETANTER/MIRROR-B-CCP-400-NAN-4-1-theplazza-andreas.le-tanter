@@ -26,6 +26,7 @@ set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
     tests/PizzaClass/AmericanaPizza.cpp
+    tests/PizzaClass/FantasiaPizza.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
