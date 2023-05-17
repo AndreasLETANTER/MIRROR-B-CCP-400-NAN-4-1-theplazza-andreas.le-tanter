@@ -27,6 +27,7 @@ set(TESTS
     tests/ThreadClass.cpp
     tests/PizzaClass/AmericanaPizza.cpp
     tests/PizzaClass/FantasiaPizza.cpp
+    tests/PizzaClass/MargaritaPizza.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
