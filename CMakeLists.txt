@@ -12,9 +12,10 @@ set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Pizza/APizza.cpp
-    src/Plazza/Pizza/Margarita/Margarita.cpp
-    src/Plazza/Pizza/Regina/Regina.cpp
-    src/Plazza/Pizza/Americana/Americana.cpp
+    src/Plazza/Pizza/Margarita/MargaritaPizza.cpp
+    src/Plazza/Pizza/Regina/ReginaPizza.cpp
+    src/Plazza/Pizza/Americana/AmericanaPizza.cpp
+    src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
 )
 
 set(MAIN
@@ -24,6 +25,7 @@ set(MAIN
 set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
+    tests/PizzaClass/AmericanaPizza.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
