@@ -37,7 +37,7 @@ bool Parser::isAuthorized(std::string inputParam)
     return false;
 }
 
-std::vector<std::unique_ptr<IPizza>> Parser::getInput()
+std::vector<std::shared_ptr<IPizza>> Parser::getInput()
 {
     std::string input;
     std::string inputParam;

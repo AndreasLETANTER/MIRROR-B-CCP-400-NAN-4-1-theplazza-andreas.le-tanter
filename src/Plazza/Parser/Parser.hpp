@@ -13,7 +13,7 @@ class Parser : public IParser {
 public:
     Parser(int ac, const char **av);
     ~Parser() override = default;
-    std::vector<std::unique_ptr<IPizza>> getInput() override;
+    std::vector<std::shared_ptr<IPizza>> getInput() override;
     std::string getInputString(std::string input, int *i);
     bool isAuthorized(std::string inputParam);
 private:
