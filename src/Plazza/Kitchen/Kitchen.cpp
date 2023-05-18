@@ -35,6 +35,8 @@ bool Kitchen::checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded)
 
 bool Kitchen::isKitchenFilled()
 {
+    if (m_nbCurrentPizza == m_nbPizzaMax)
+        return true;
     return false;
 }
 
