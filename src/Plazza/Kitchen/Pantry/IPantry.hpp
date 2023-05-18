@@ -19,13 +19,13 @@ class IPantry {
          * @param t_ingredient the ingredient to add
          * @param t_nb_ingredient the number of ingredient to add
         */
-        virtual void addIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient) = 0;
+        virtual void addIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient) = 0;
         /**
          * @brief Remove N ingredient to the pantry
          * @param t_ingredient the ingredient to remove
          * @param t_nb_ingredient the number of ingredient to remove
         */
-        virtual void removeIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient) = 0;
+        virtual void removeIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient) = 0;
         /**
          * @brief Check if the pantry contain the ingredient
          * @param t_ingredient the ingredient to check

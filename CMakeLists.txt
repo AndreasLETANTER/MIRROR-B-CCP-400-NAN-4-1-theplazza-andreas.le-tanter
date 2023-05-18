@@ -6,7 +6,7 @@ project("plazza" VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(NAME "plazza")
 set(TEST_NAME "unit_tests")
-set(CXX_FLAGS -Wall -Wextra -Werror -g)
+set(CXX_FLAGS -Wall -Wextra -Werror)
 ###############################DIRECTORIES SRC####################################
 set(SRC
     src/IMutex/Mutex.cpp

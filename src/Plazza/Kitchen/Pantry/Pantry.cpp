@@ -7,6 +7,10 @@
 
 #include "Pantry.hpp"
 
+/**
+ * @brief Construct a new Pantry:: Pantry object
+ * @details set all the ingredient to 5
+*/
 Pantry::Pantry()
 {
     m_pantry[PizzaIngredient::Dough] = 5;
@@ -25,7 +29,7 @@ Pantry::Pantry()
  * @param t_ingredient the ingredient to add
  * @param t_nb_ingredient the number of ingredient to add
 */
-void Pantry::addIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient)
+void Pantry::addIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient)
 {
     m_pantry[t_ingredient] += t_nb_ingredient;
 }
@@ -35,12 +39,13 @@ void Pantry::addIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient)
  * @param t_ingredient the ingredient to remove
  * @param t_nb_ingredient the number of ingredient to remove
 */
-void Pantry::removeIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient)
+void Pantry::removeIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient)
 {
-    m_pantry[t_ingredient] -= t_nb_ingredient;
-
-    if (m_pantry[t_ingredient] < 0)
+    if (m_pantry[t_ingredient] < t_nb_ingredient) {
         m_pantry[t_ingredient] = 0;
+    } else {
+        m_pantry[t_ingredient] -= t_nb_ingredient;
+    }
 }
 
 /**
