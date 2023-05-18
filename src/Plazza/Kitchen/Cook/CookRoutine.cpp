@@ -7,8 +7,9 @@
 
 #include "../Kitchen.hpp"
 
-void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool)
+void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, std::unique_ptr<IPantry> t_pantry)
 {
     (void)t_timeMultiplier;
     (void)t_pizzaPool;
+    (void)t_pantry;
 }
