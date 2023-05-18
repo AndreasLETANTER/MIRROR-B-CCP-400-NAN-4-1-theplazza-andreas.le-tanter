@@ -10,6 +10,8 @@
 #include "IReception.hpp"
 #include "../../ISafeQueue/SafeQueue.hpp"
 
+#include <fstream>
+
 /**
  * @brief Interface for the reception class
 */
@@ -50,4 +52,5 @@ class Reception : public IReception {
         bool m_is_running;
         std::string m_command;
         SafeQueue<std::shared_ptr<IPizza>> m_queue;
+        std::fstream m_file;
 };

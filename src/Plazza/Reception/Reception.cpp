@@ -7,6 +7,7 @@
 
 #include "Reception.hpp"
 #include "../Parser/Parser.hpp"
+#include "Kitchen/Kitchen.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -43,6 +44,13 @@ void Reception::sendPizzaToQueue(std::shared_ptr<IPizza> pizza)
 {
     if (pizza == nullptr)
         return;
+    try {
+        m_file.open("", std::ios::out | std::ios::app);
+        m_file << "Pizza : " << pizza->getSize() << " | Type : " << pizza->getType();
+        m_file.close();
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
     m_queue.push(pizza);
 }
 
@@ -51,7 +59,7 @@ void Reception::createKitchen()
     try {
         pid_t pid = fork();
         if (pid == 0) {
-            
+            Kitchen kitchen(nb cook, time multiple)
         }
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
@@ -60,4 +68,6 @@ void Reception::createKitchen()
 
 void Reception::sendPizzaToKitchen()
 {
+    // isKitchen filled
+    // check pentry
 }
