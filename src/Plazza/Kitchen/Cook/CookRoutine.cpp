@@ -12,8 +12,9 @@ void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared
 {
     while (true) {
         auto pizza = t_pizzaPool->pop();
-        int timeMilliseconds = (pizza->getCookingTime() * t_timeMultiplier) * 1000;
+        double cookingTime = pizza->getCookingTime();
+        int timeMilliseconds = (cookingTime * t_timeMultiplier) * 1000;
         std::this_thread::sleep_for(std::chrono::milliseconds(timeMilliseconds));
-        std::cout << "Pizza " << pizza->getType() << " is ready" << std::endl;
+        printf("Pizza %d is ready\n", pizza->getType());
     }
 }

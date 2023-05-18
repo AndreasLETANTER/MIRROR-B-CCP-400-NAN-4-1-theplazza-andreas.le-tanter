@@ -14,16 +14,21 @@
 #include "IMutex/ScopedLock/ScopedLock.hpp"
 #include "ISafeQueue/SafeQueue.hpp"
 #include "Plazza/Kitchen/Kitchen.hpp"
-#include <random>
+#include "Plazza/Pizza/Americana/AmericanaPizza.hpp"
+#include "Plazza/Pizza/Fantasia/FantasiaPizza.hpp"
+#include "Plazza/Pizza/Margarita/MargaritaPizza.hpp"
+#include "Plazza/Pizza/Regina/ReginaPizza.hpp"
 
 int main(int argc, char **argv)
 {
     (void)argc;
-    (void)argv;
-    std::unique_ptr<IKitchen> kitchen = std::make_unique<Kitchen>(2, 1);
-    std::vector<std::shared_ptr<IPizza>> pizzaList;
+    std::unique_ptr<IKitchen> kitchen = std::make_unique<Kitchen>(atoi(argv[1]), (double) atof(argv[2]));
 
-    kitchen->createCooks();
     kitchen->createPantry();
+    for (int i = 0; i < 10; i++) {
+        if (kitchen->isKitchenFilled() == false && kitchen->checkPantry(std::make_shared<ReginaPizza>(PizzaSize::M)->getIngredients()))
+            kitchen->addPizzaToPool(std::make_shared<ReginaPizza>(PizzaSize::M));
+    }
+    kitchen->createCooks();
     return 0;
 }
