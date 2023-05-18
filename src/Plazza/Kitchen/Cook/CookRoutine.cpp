@@ -6,10 +6,14 @@
 */
 
 #include "../Kitchen.hpp"
+#include <iostream>
 
-void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, std::unique_ptr<IPantry> t_pantry)
+void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool)
 {
-    (void)t_timeMultiplier;
-    (void)t_pizzaPool;
-    (void)t_pantry;
+    while (true) {
+        auto pizza = t_pizzaPool->pop();
+        int timeMilliseconds = (pizza->getCookingTime() * t_timeMultiplier) * 1000;
+        std::this_thread::sleep_for(std::chrono::milliseconds(timeMilliseconds));
+        std::cout << "Pizza " << pizza->getType() << " is ready" << std::endl;
+    }
 }
