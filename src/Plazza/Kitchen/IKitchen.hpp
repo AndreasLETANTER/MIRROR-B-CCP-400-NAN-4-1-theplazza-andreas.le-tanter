@@ -7,6 +7,7 @@
 
 #pragma once
 #include <vector>
+#include <memory>
 #include "../Pizza/IPizza.hpp"
 
 /**
@@ -18,7 +19,7 @@ class IKitchen {
         /**
          * @brief Create a Cook object (thread that cook the pizza)
         */
-        virtual void createCook() = 0;
+        virtual void createCooks() = 0;
         /**
          * @brief Create a Pantry object (class that contain the ingredients)
         */

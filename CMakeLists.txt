@@ -19,6 +19,8 @@ set(SRC
     src/Plazza/Pizza/Americana/AmericanaPizza.cpp
     src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
     src/Plazza/Kitchen/Pantry/Pantry.cpp
+    src/Plazza/Kitchen/Cook/CookRoutine.cpp
+    src/Plazza/Kitchen/Kitchen.cpp
 )
 
 set(MAIN
