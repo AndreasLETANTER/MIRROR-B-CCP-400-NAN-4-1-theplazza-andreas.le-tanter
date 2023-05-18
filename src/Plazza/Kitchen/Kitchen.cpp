@@ -19,7 +19,7 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier)
 Kitchen::~Kitchen()
 {
     for (auto &cook : m_cookPool) {
-        cook->joinThread();
+        cook->stopThread();
     }
 }
 
