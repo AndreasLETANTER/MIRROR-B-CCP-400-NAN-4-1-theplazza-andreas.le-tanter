@@ -6,6 +6,7 @@
 */
 
 #include "Kitchen.hpp"
+#include "Cook/CookRoutine.hpp"
 
 Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier)
 {
@@ -15,8 +16,18 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier)
     m_nbCurrentPizza = 0;
 }
 
-void Kitchen::createCook()
+Kitchen::~Kitchen()
 {
+    for (auto &cook : m_cookPool) {
+        cook->joinThread();
+    }
+}
+
+void Kitchen::createCooks()
+{
+    for (int i = 0; i < m_nbCook; i++) {
+        m_cookPool.push_back(std::make_unique<Thread<decltype(CookRoutine), double, decltype(m_pizzaPool)>>(CookRoutine, m_timeMultiplier, m_pizzaPool));
+    }
 }
 
 void Kitchen::createPantry()
@@ -42,6 +53,6 @@ bool Kitchen::isKitchenFilled()
 
 void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
 {
-    m_pizzaPool.push_back(t_pizza);
+    m_pizzaPool->push(t_pizza);
     m_nbCurrentPizza++;
 }

@@ -8,13 +8,15 @@
 #pragma once
 #include "IKitchen.hpp"
 #include "Pantry/Pantry.hpp"
+#include "../../ISafeQueue/SafeQueue.hpp"
+#include "../../IThread/Thread.hpp"
 
 class Kitchen : public IKitchen {
     public:
         Kitchen() = default;
         Kitchen(int t_nbCook, double t_timeMultiplier);
-        ~Kitchen() override = default;
-        void createCook() override;
+        ~Kitchen() override;;
+        void createCooks() override;
         void createPantry() override;
         bool checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded) override;
         bool isKitchenFilled() override;
@@ -23,7 +25,10 @@ class Kitchen : public IKitchen {
     protected:
     private:
         std::unique_ptr<IPantry> m_pantry;
-        std::vector<std::shared_ptr<IPizza>> m_pizzaPool;
+        std::shared_ptr<IMutex> _mutex = std::make_shared<Mutex>();
+        std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_pizzaPool = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(_mutex);
+        std::vector<std::unique_ptr<IThread>> m_cookPool;
+        
         double m_timeMultiplier;
         int m_nbCook;
         int m_nbPizzaMax;

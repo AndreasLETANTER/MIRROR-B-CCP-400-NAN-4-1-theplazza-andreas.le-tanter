@@ -13,6 +13,7 @@ set(SRC
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Kitchen/Pantry/Pantry.cpp
     src/Plazza/Kitchen/Kitchen.cpp
+    src/Plazza/Kitchen/Cook/CookRoutine.cpp
 )
 
 set(MAIN
