@@ -12,7 +12,6 @@ set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Kitchen/Pantry/Pantry.cpp
-    src/Plazza/Kitchen/Kitchen.cpp
 )
 
 set(MAIN
@@ -23,7 +22,6 @@ set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
     tests/KitchenClass/PantryClass/Pantry.cpp
-    tests/KitchenClass/Kitchen.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
