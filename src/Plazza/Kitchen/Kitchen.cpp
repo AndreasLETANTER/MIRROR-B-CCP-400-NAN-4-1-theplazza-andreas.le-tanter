@@ -55,4 +55,7 @@ void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
 {
     m_pizzaPool->push(t_pizza);
     m_nbCurrentPizza++;
+    for (auto &ingredient : t_pizza->getIngredients()) {
+        m_pantry->removeIngredient(ingredient, 1);
+    }
 }

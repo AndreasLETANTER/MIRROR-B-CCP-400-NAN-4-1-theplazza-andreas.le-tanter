@@ -28,7 +28,6 @@ class Kitchen : public IKitchen {
         std::shared_ptr<IMutex> _mutex = std::make_shared<Mutex>();
         std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_pizzaPool = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(_mutex);
         std::vector<std::unique_ptr<IThread>> m_cookPool;
-        
         double m_timeMultiplier;
         int m_nbCook;
         int m_nbPizzaMax;
