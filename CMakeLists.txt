@@ -12,6 +12,7 @@ set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Parser/Parser.cpp
+    src/Plazza/Reception/Reception.cpp
 )
 
 set(MAIN

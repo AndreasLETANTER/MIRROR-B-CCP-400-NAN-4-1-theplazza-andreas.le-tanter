@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <memory>
+
+#include "../Pizza/IPizza.hpp"
+
 /**
  * @brief Interface for the reception class
 */

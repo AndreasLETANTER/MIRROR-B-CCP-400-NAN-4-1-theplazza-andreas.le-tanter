@@ -35,7 +35,7 @@ void consumerRoutine(std::shared_ptr<ISafeQueue<int>> queue)
     }
 }
 
-int main(int argc, char **argv)
+int main(const int argc, const char **argv)
 {
     int nb_producers = std::stoi(argv[1]);
     int nb_consumers = std::stoi(argv[2]);

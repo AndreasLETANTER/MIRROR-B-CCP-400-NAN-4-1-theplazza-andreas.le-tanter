@@ -8,7 +8,7 @@
 #pragma once
 
 #include "IReception.hpp"
-#include "SafeQueue.hpp"
+#include "../../ISafeQueue/SafeQueue.hpp"
 
 /**
  * @brief Interface for the reception class
