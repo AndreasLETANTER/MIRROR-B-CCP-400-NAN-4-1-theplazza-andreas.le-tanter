@@ -11,6 +11,7 @@ set(CXX_FLAGS -Wall -Wextra -Werror)
 set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
+    src/Plazza/Kitchen/Pantry/Pantry.cpp
 )
 
 set(MAIN
@@ -20,6 +21,7 @@ set(MAIN
 set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
+    tests/KitchenClass/PantryClass/Pantry.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
