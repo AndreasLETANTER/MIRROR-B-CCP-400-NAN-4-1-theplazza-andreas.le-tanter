@@ -7,6 +7,14 @@
 
 #include "Kitchen.hpp"
 
+Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier)
+{
+    m_nbCook = t_nbCook;
+    m_timeMultiplier = t_timeMultiplier;
+    m_nbPizzaMax = t_nbCook * 2;
+    m_nbCurrentPizza = 0;
+}
+
 void Kitchen::createCook()
 {
 }

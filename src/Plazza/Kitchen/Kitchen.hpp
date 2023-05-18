@@ -12,6 +12,7 @@
 class Kitchen : public IKitchen {
     public:
         Kitchen() = default;
+        Kitchen(int t_nbCook, double t_timeMultiplier);
         ~Kitchen() override = default;
         void createCook() override;
         void createPantry() override;
@@ -23,4 +24,8 @@ class Kitchen : public IKitchen {
     private:
         std::unique_ptr<IPantry> m_pantry;
         std::vector<std::shared_ptr<IPizza>> m_pizzaPool;
+        double m_timeMultiplier;
+        int m_nbCook;
+        int m_nbPizzaMax;
+        int m_nbCurrentPizza;
 };
