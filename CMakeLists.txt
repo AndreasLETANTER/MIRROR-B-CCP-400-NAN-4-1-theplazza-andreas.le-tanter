@@ -16,6 +16,7 @@ set(SRC
     src/Plazza/Pizza/Regina/ReginaPizza.cpp
     src/Plazza/Pizza/Americana/AmericanaPizza.cpp
     src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
+    src/Plazza/Kitchen/Pantry/Pantry.cpp
 )
 
 set(MAIN
@@ -29,6 +30,7 @@ set(TESTS
     tests/PizzaClass/FantasiaPizza.cpp
     tests/PizzaClass/MargaritaPizza.cpp
     tests/PizzaClass/ReginaPizza.cpp
+    tests/KitchenClass/PantryClass/Pantry.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################

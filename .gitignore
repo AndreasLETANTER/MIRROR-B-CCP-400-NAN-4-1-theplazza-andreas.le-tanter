@@ -37,3 +37,4 @@ CMakeCache.txt
 cmake_install.cmake
 Makefile
 .bash_history
+.vscode
