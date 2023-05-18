@@ -62,7 +62,7 @@ enum PizzaIngredient
 */
 class IPizza {
     public:
-        virtual ~IPizza() = 0;
+        virtual ~IPizza() = default;
         /**
          * @brief Get the Type of the pizza
          * @return PizzaType 

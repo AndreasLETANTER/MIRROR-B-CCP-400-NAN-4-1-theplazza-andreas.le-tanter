@@ -11,20 +11,27 @@
 
 class Pantry : public IPantry {
     public:
+        /**
+         * @brief Construct a new Pantry:: Pantry object
+         * @details set all the ingredient to 5
+        */
         Pantry();
+        /**
+         * @brief Destroy the Pantry:: Pantry object
+        */
         ~Pantry() override = default;
         /**
          * @brief Add N ingredient to the pantry
          * @param t_ingredient the ingredient to add
          * @param t_nb_ingredient the number of ingredient to add
         */
-        void addIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient) override;
+        void addIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient) override;
         /**
          * @brief Remove N ingredient from the pantry
          * @param t_ingredient the ingredient to remove
          * @param t_nb_ingredient the number of ingredient to remove
         */
-        void removeIngredient(PizzaIngredient t_ingredient, int t_nb_ingredient) override;
+        void removeIngredient(PizzaIngredient t_ingredient, unsigned int t_nb_ingredient) override;
         /**
          * @brief Check if the pantry contain the ingredient
          * @param t_ingredient the ingredient to check
@@ -39,5 +46,5 @@ class Pantry : public IPantry {
          * @brief The pantry of the kitchen
          * @details The pantry is a map of ingredient and the number of ingredient
         */
-        std::map<PizzaIngredient, int> m_pantry;
+        std::map<PizzaIngredient, unsigned int> m_pantry;
 };

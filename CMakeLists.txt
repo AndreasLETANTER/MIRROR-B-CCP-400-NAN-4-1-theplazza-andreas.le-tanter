@@ -6,13 +6,17 @@ project("plazza" VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(NAME "plazza")
 set(TEST_NAME "unit_tests")
-set(CXX_FLAGS -Wall -Wextra -Werror -g)
+set(CXX_FLAGS -Wall -Wextra -Werror)
 ###############################DIRECTORIES SRC####################################
 set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
+    src/Plazza/Pizza/APizza.cpp
+    src/Plazza/Pizza/Margarita/MargaritaPizza.cpp
+    src/Plazza/Pizza/Regina/ReginaPizza.cpp
+    src/Plazza/Pizza/Americana/AmericanaPizza.cpp
+    src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
     src/Plazza/Kitchen/Pantry/Pantry.cpp
-    src/Plazza/Kitchen/Kitchen.cpp
     src/Plazza/Kitchen/Cook/CookRoutine.cpp
 )
 
@@ -23,8 +27,11 @@ set(MAIN
 set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
+    tests/PizzaClass/AmericanaPizza.cpp
+    tests/PizzaClass/FantasiaPizza.cpp
+    tests/PizzaClass/MargaritaPizza.cpp
+    tests/PizzaClass/ReginaPizza.cpp
     tests/KitchenClass/PantryClass/Pantry.cpp
-    tests/KitchenClass/Kitchen.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
