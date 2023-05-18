@@ -17,3 +17,19 @@ Test(Kitchen, Basic_Check_Ingredient)
     kitchen->createPantry();
     cr_assert_eq(kitchen->checkPantry(ingredientNeeded), true);
 }
+
+Test(Kitchen, Basic_isKitchenFilled)
+{
+    std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(5, 5);
+
+    kitchen->createPantry();
+    cr_assert_eq(kitchen->isKitchenFilled(), false);
+}
+
+Test(Kitchen, KitchenFilled)
+{
+    std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(0, 5);
+
+    kitchen->createPantry();
+    cr_assert_eq(kitchen->isKitchenFilled(), true);
+}
