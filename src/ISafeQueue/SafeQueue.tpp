@@ -49,6 +49,7 @@ void SafeQueue<T>::push(T value)
     ScopedLock lock(m_mutex);
 
     m_queue.push(value);
+    m_cond.notify_one();
 }
 
 /**
@@ -79,9 +80,8 @@ bool SafeQueue<T>::tryPop(T &value)
 template <typename T>
 T SafeQueue<T>::pop()
 {
-    ScopedLock _scopedLock(m_mutex);
     std::mutex _mutex;
-    std::unique_lock<std::mutex> _lock(_mutex);
+    std::unique_lock<std::mutex> _lock(m_mutex->getMutex());
     T value;
 
     while (m_queue.empty())

@@ -14,12 +14,14 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier)
     m_timeMultiplier = t_timeMultiplier;
     m_nbPizzaMax = t_nbCook * 2;
     m_nbCurrentPizza = 0;
+    createPantry();
+    createCooks();
 }
 
 Kitchen::~Kitchen()
 {
     for (auto &cook : m_cookPool) {
-        cook->stopThread();
+        cook->joinThread();
     }
 }
 
