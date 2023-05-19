@@ -12,6 +12,12 @@ set(SRC
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Parser/Parser.cpp
+    src/Plazza/Pizza/APizza.cpp
+    src/Plazza/Pizza/Margarita/MargaritaPizza.cpp
+    src/Plazza/Pizza/Regina/ReginaPizza.cpp
+    src/Plazza/Pizza/Americana/AmericanaPizza.cpp
+    src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
+    src/Plazza/Kitchen/Pantry/Pantry.cpp
 )
 
 set(MAIN
