@@ -26,6 +26,7 @@ class SafeQueue : public ISafeQueue<T> {
         ~SafeQueue();
         void push(T value) override;
         bool tryPop(T &value) override;
+        size_t size() override;
         T pop() override;
 
     protected:

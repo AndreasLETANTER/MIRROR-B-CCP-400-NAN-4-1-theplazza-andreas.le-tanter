@@ -33,7 +33,6 @@ class Kitchen : public IKitchen {
         std::shared_ptr<IMutex> m_pantryMutex = std::make_shared<Mutex>();
         std::unique_ptr<IThread> m_kitchenBodyguard;
         double m_timeMultiplier;
-        int m_nbCook;
-        int m_nbPizzaMax;
-        int m_nbCurrentPizza;
+        size_t m_nbCook;
+        size_t m_nbPizzaMax;
 };

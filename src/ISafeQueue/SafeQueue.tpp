@@ -90,3 +90,16 @@ T SafeQueue<T>::pop()
     m_queue.pop();
     return value;
 }
+
+/**
+ * @brief get the size of the queue
+ * @tparam T type of the queue
+ * @return size_t size of the queue
+*/
+template <typename T>
+size_t SafeQueue<T>::size()
+{
+    ScopedLock lock(m_mutex);
+
+    return m_queue.size();
+}

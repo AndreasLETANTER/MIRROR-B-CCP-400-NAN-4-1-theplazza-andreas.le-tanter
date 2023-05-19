@@ -31,7 +31,6 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier, int t_refillTime)
     m_nbCook = t_nbCook;
     m_timeMultiplier = t_timeMultiplier;
     m_nbPizzaMax = t_nbCook * 2;
-    m_nbCurrentPizza = 0;
     m_refillTime = t_refillTime;
     m_pantryMutex = std::make_shared<Mutex>();
     createPantry();
@@ -48,7 +47,7 @@ Kitchen::~Kitchen()
 
 void Kitchen::createCooks()
 {
-    for (int i = 0; i < m_nbCook; i++) {
+    for (size_t i = 0; i < m_nbCook; i++) {
         m_cookPool.push_back(std::make_unique<Thread<decltype(CookRoutine), double, decltype(m_pizzaPool)>>(CookRoutine, m_timeMultiplier, m_pizzaPool));
     }
 }
@@ -73,7 +72,7 @@ bool Kitchen::checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded)
 
 bool Kitchen::isKitchenFilled()
 {
-    if (m_nbCurrentPizza == m_nbPizzaMax)
+    if (m_pizzaPool->size() == m_nbPizzaMax)
         return true;
     return false;
 }
@@ -81,7 +80,6 @@ bool Kitchen::isKitchenFilled()
 void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
 {
     m_pizzaPool->push(t_pizza);
-    m_nbCurrentPizza++;
     m_pantryMutex->lock();
     for (auto &ingredient : t_pizza->getIngredients()) {
         m_pantry->removeIngredient(ingredient, 1);

@@ -18,6 +18,7 @@ class ISafeQueue {
         virtual void push(T value) = 0;
         virtual bool tryPop(T &value) = 0;
         virtual T pop() = 0;
+        virtual size_t size() = 0;
 
     protected:
     private:
