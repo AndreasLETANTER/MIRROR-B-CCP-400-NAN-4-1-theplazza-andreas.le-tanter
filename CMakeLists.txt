@@ -21,6 +21,11 @@ set(MAIN
 set(TESTS
     tests/SafeQueueClass.cpp
     tests/ThreadClass.cpp
+    tests/PizzaClass/AmericanaPizza.cpp
+    tests/PizzaClass/FantasiaPizza.cpp
+    tests/PizzaClass/MargaritaPizza.cpp
+    tests/PizzaClass/ReginaPizza.cpp
+    tests/KitchenClass/PantryClass/Pantry.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
