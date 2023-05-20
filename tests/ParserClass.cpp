@@ -99,3 +99,21 @@ Test(check_too_big_pizza_number, IsAuthorized)
 
     cr_assert_eq(parser.isAuthorized(input), false);
 }
+
+Test(string_in_vector, isInVector)
+{
+    std::vector<std::string> vector = {"regina", "margarita", "americana", "fantasia"};
+    std::string str = "regina";
+    Parser parser;
+
+    cr_assert_eq(parser.isInVector(vector, str), true);
+}
+
+Test(string_not_in_vector, isInVector)
+{
+    std::vector<std::string> vector = {"regina", "margarita", "americana", "fantasia"};
+    std::string str = "regin";
+    Parser parser;
+
+    cr_assert_eq(parser.isInVector(vector, str), false);
+}
