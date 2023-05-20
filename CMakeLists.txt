@@ -9,6 +9,7 @@ set(TEST_NAME "unit_tests")
 set(CXX_FLAGS -Wall -Wextra -Werror)
 ###############################DIRECTORIES SRC####################################
 set(SRC
+    src/Timer/Timer.cpp
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Pizza/APizza.cpp
@@ -18,6 +19,7 @@ set(SRC
     src/Plazza/Pizza/Fantasia/FantasiaPizza.cpp
     src/Plazza/Kitchen/Pantry/Pantry.cpp
     src/Plazza/Kitchen/Cook/CookRoutine.cpp
+    src/Plazza/Kitchen/Bodyguard/BodyguardRoutine.cpp
     src/Plazza/Kitchen/Kitchen.cpp
 )
 

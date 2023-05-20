@@ -7,6 +7,7 @@
 
 #include "Kitchen.hpp"
 #include "Cook/CookRoutine.hpp"
+#include "Bodyguard/BodyguardRoutine.hpp"
 
 static void PantryRoutine(std::shared_ptr<IPantry> t_pantry, int t_timeMilliseconds, std::shared_ptr<IMutex> t_mutex)
 {
@@ -33,22 +34,23 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier, int t_refillTime)
     m_nbPizzaMax = t_nbCook * 2;
     m_refillTime = t_refillTime;
     m_pantryMutex = std::make_shared<Mutex>();
+    m_kitchenNeedExit = std::make_shared<bool>(false);
     createPantry();
-    m_pantryThread = std::make_unique<Thread<decltype(PantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(PantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
     createCooks();
+    m_pantryThread = std::make_unique<Thread<decltype(PantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(PantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
+    m_kitchenBodyguard = std::make_unique<Thread<decltype(BodyguardRoutine), decltype(m_pizzaPool), decltype(m_cookPool), decltype(m_kitchenNeedExit)>>(BodyguardRoutine, m_pizzaPool, m_cookPool, m_kitchenNeedExit);
 }
 
 Kitchen::~Kitchen()
 {
-    for (auto &cook : m_cookPool) {
-        cook->joinThread();
-    }
+    m_kitchenBodyguard->joinThread();
+    m_pantryThread->stopThread();
 }
 
 void Kitchen::createCooks()
 {
     for (size_t i = 0; i < m_nbCook; i++) {
-        m_cookPool.push_back(std::make_unique<Thread<decltype(CookRoutine), double, decltype(m_pizzaPool)>>(CookRoutine, m_timeMultiplier, m_pizzaPool));
+        m_cookPool.push_back(std::make_shared<Thread<decltype(CookRoutine), double, decltype(m_pizzaPool)>>(CookRoutine, m_timeMultiplier, m_pizzaPool));
     }
 }
 
@@ -85,4 +87,9 @@ void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
         m_pantry->removeIngredient(ingredient, 1);
     }
     m_pantryMutex->unlock();
+}
+
+bool Kitchen::doesKitchenNeedExit()
+{
+    return *m_kitchenNeedExit;
 }
