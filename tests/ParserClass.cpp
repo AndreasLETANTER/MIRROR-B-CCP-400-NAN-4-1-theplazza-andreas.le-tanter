@@ -43,3 +43,59 @@ Test(check_parsing_with_string_end, GetInputString)
     cr_assert_eq(result, "regina");
     cr_assert_eq(i, 6);
 }
+
+Test(check_valid_pizza_name, IsAuthorized)
+{
+    std::string input = "regina";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), true);
+}
+
+Test(check_invalid_pizza_name, IsAuthorized)
+{
+    std::string input = "regin";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), false);
+}
+
+Test(check_valid_pizza_size, IsAuthorized)
+{
+    std::string input = "S";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), true);
+}
+
+Test(check_invalid_pizza_size, IsAuthorized)
+{
+    std::string input = "T";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), false);
+}
+
+Test(check_valid_pizza_number, IsAuthorized)
+{
+    std::string input = "x2";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), true);
+}
+
+Test(check_invalid_pizza_number, IsAuthorized)
+{
+    std::string input = "x";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), false);
+}
+
+Test(check_too_big_pizza_number, IsAuthorized)
+{
+    std::string input = "x10";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), false);
+}
