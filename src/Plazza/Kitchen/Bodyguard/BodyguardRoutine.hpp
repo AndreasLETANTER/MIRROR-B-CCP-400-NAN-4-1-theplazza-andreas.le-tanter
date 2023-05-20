@@ -8,4 +8,4 @@
 #pragma once
 #include "../Kitchen.hpp"
 
-void BodyguardRoutine(std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, std::vector<std::shared_ptr<IThread>> m_cookPool, std::shared_ptr<bool> t_kitchenNeedExit);
+void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, std::shared_ptr<bool> t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex);
