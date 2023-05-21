@@ -1,0 +1,74 @@
+name = "Handle arguments"
+
+[[test]]
+name = "No arguments"
+type = "command"
+command = ".././plazza"
+expected.stdout = "USAGE: ./plazza [multiplier] [nb_cooks] [time]\n\tmultiplier\tmultiplier for the cooking time of the pizzas\n\tnb_cooks\tnumber of cooks per kitchen\n\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients\n"
+expected.stderr = ""
+expected.exit_code = 0
+
+[[test]]
+name = "Too many arguments"
+type = "command"
+command = ".././plazza Carla Bruni jouait de la guitare"
+expected.stdout = "USAGE: ./plazza [multiplier] [nb_cooks] [time]\n\tmultiplier\tmultiplier for the cooking time of the pizzas\n\tnb_cooks\tnumber of cooks per kitchen\n\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients\n"
+expected.stderr = ""
+expected.exit_code = 0
+
+[[test]]
+name = "Negative args simple 1"
+type = "command"
+command = ".././plazza -2 12 4"
+expected.stdout = ""
+expected.stderr = "Arguments must be numbers\n"
+expected.exit_code = 84
+
+[[test]]
+name = "Negative args simple 2"
+type = "command"
+command = ".././plazza 3 -44 69"
+expected.stdout = ""
+expected.stderr = "Arguments must be numbers\n"
+expected.exit_code = 84
+
+[[test]]
+name = "Negative args simple 3"
+type = "command"
+command = ".././plazza 9 422 -2"
+expected.stdout = ""
+expected.stderr = "Arguments must be numbers\n"
+expected.exit_code = 84
+
+[[test]]
+name = "Negative args multiple"
+type = "command"
+command = ".././plazza -42 -21 -90"
+expected.stdout = ""
+expected.stderr = "Arguments must be numbers\n"
+expected.exit_code = 84
+
+[[test]]
+name = "Epitech subject"
+type = "command"
+command = ".././plazza 2 5 2000"
+expected.stdout = ""
+expected.stderr = ""
+expected.exit_code = 0
+
+[[test]]
+name = "Double check"
+type = "command"
+command = ".././plazza 2.9 2 777"
+expected.stdout = ""
+expected.stderr = ""
+expected.exit_code = 0
+
+[[test]]
+name = "Double check with negative"
+type = "command"
+command = ".././plazza -2.9 11 4000"
+expected.stdout = ""
+expected.stderr = "Arguments must be numbers\n"
+expected.exit_code = 84
+
