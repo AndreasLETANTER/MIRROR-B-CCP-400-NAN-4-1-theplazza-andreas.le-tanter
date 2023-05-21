@@ -144,6 +144,7 @@ jobs:
         run: |
           wget "https://github.com/Atomot/ftest/releases/download/v0.1.0/ftest" -O ftest
           chmod +x ftest
+          ./ftest tests/
           echo "summary=| Run functinals tests " >> $GITHUB_OUTPUT
           echo "result=| :white_check_mark: |" >> $GITHUB_OUTPUT
 

@@ -5,51 +5,55 @@
 ** main
 */
 
-#include <vector>
-#include <thread>
 #include <iostream>
-#include <memory>
-#include "IThread/Thread.hpp"
-#include "IMutex/Mutex.hpp"
-#include "IMutex/ScopedLock/ScopedLock.hpp"
-#include "ISafeQueue/SafeQueue.hpp"
-#include <random>
+#include <string>
 
+#define EXIT_SUCCESS 0
+#define EXIT_ERROR 84
 
-void producerRoutine(std::shared_ptr<ISafeQueue<int>> queue)
+static void print_help_if_needed(const int ac)
 {
-    int value;
-
-    while (1) {
-        value = rand() % 100;
-        queue->push(value);
+    if (ac != 4) {
+        std::cout << "USAGE: ./plazza [multiplier] [nb_cooks] [time]\n"
+                    << "\tmultiplier\tmultiplier for the cooking time of the pizzas\n"
+                    << "\tnb_cooks\tnumber of cooks per kitchen\n"
+                    << "\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients"
+                    << std::endl;
+        exit(EXIT_SUCCESS);
     }
 }
 
-void consumerRoutine(std::shared_ptr<ISafeQueue<int>> queue)
+static bool is_number(const std::string &str)
 {
-    int value;
-
-    while ((value = queue->pop()) != -1) {
-        std::cout << value << std::endl;
+    if (str.empty()) {
+        return false;
     }
+    for (const char &c : str) {
+        if (!std::isdigit(c) && c != '.') {
+            return false;
+        }
+    }
+    return true;
 }
 
-int main(int argc, char **argv)
+int main(const int ac, const char **av)
 {
-    int nb_producers = std::stoi(argv[1]);
-    int nb_consumers = std::stoi(argv[2]);
-    std::vector<std::unique_ptr<IThread>> threads;
-    std::shared_ptr<IMutex> _mutex = std::make_shared<Mutex>();
-    std::shared_ptr<ISafeQueue<int>> queue = std::make_shared<SafeQueue<int>>(_mutex);
+    double multiplier = 0;
+    int number_of_cooks = 0;
+    int refilling_time = 0;
 
-    if (argc != 3)
-        return (84);
-    for (int i = 0; i < nb_producers; i++)
-        threads.push_back(std::make_unique<Thread<decltype(producerRoutine), decltype(queue)>>(producerRoutine, queue));
-    for (int i = 0; i < nb_consumers; i++)
-        threads.push_back(std::make_unique<Thread<decltype(consumerRoutine), decltype(queue)>>(consumerRoutine, queue));
-    for (auto &thread : threads)
-        thread->joinThread();
-    return 0;
+    print_help_if_needed(ac);
+    if (!is_number(av[1]) || !is_number(av[2]) || !is_number(av[3])) {
+        std::cerr << "Arguments must be numbers" << std::endl;
+        return EXIT_ERROR;
+    }
+    multiplier = std::stod(av[1]);
+    number_of_cooks = std::stoul(av[2]);
+    refilling_time = std::stoul(av[3]);
+    if (multiplier <= 0 || number_of_cooks <= 0 || refilling_time <= 0) {
+        std::cerr << "Arguments must be positive" << std::endl;
+        return EXIT_ERROR;
+    }
+    // Reception class
+    return EXIT_SUCCESS;
 }
