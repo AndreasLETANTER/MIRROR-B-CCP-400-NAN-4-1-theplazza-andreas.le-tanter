@@ -141,3 +141,37 @@ Test(Pizza, StringToPizzaSize)
     PizzaSize result5 = parser.stringToPizzaSize(input5);
     cr_assert_eq(result5, PizzaSize::XXL);
 }
+
+Test(Pizza, setPizza)
+{
+    Parser parser;
+    std::string size1 = "S";
+    std::string pizza1 = "regina";
+    std::shared_ptr<IPizza> result1 = parser.setPizza(pizza1, size1);
+    cr_assert_eq(result1->getSize(), PizzaSize::S);
+    cr_assert_eq(result1->getType(), PizzaType::Regina);
+
+    std::string size2 = "M";
+    std::string pizza2 = "americana";
+    std::shared_ptr<IPizza> result2 = parser.setPizza(pizza2, size2);
+    cr_assert_eq(result2->getSize(), PizzaSize::M);
+    cr_assert_eq(result2->getType(), PizzaType::Americana);
+
+    std::string size3 = "L";
+    std::string pizza3 = "fantasia";
+    std::shared_ptr<IPizza> result3 = parser.setPizza(pizza3, size3);
+    cr_assert_eq(result3->getSize(), PizzaSize::L);
+    cr_assert_eq(result3->getType(), PizzaType::Fantasia);
+
+    std::string size4 = "XL";
+    std::string pizza4 = "margarita";
+    std::shared_ptr<IPizza> result4 = parser.setPizza(pizza4, size4);
+    cr_assert_eq(result4->getSize(), PizzaSize::XL);
+    cr_assert_eq(result4->getType(), PizzaType::Margarita);
+
+    std::string size5 = "XXL";
+    std::string pizza5 = "regina";
+    std::shared_ptr<IPizza> result5 = parser.setPizza(pizza5, size5);
+    cr_assert_eq(result5->getSize(), PizzaSize::XXL);
+    cr_assert_eq(result5->getType(), PizzaType::Regina);
+}
