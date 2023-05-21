@@ -13,7 +13,7 @@ Test(check_parsing_with_space, GetInputString)
     std::string input = "regina XXL x2";
     std::string result;
     Parser parser;
-    int i = 0;
+    size_t i = 0;
 
     result = parser.getInputString(input, &i);
     cr_assert_eq(result, "regina");
@@ -25,7 +25,7 @@ Test(check_parsing_with_semicolon, GetInputString)
     std::string input = "regina;XXL x2";
     std::string result;
     Parser parser;
-    int i = 0;
+    size_t i = 0;
 
     result = parser.getInputString(input, &i);
     cr_assert_eq(result, "regina");
@@ -37,7 +37,7 @@ Test(check_parsing_with_string_end, GetInputString)
     std::string input = "regina";
     std::string result;
     Parser parser;
-    int i = 0;
+    size_t i = 0;
 
     result = parser.getInputString(input, &i);
     cr_assert_eq(result, "regina");

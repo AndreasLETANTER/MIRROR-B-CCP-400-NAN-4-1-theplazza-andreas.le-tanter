@@ -11,83 +11,82 @@
 #include "../Pizza/Regina/ReginaPizza.hpp"
 #include <iostream>
 
-std::string Parser::getInputString(std::string input, int *i)
+std::string Parser::getInputString(std::string t_input, size_t *t_i)
 {
     std::string str;
-    int start = *i;
+    int start = *t_i;
 
-    for (; input[*i] != ' ' && input[*i] != ';' && *i < (int)input.size(); (*i)++);
-    str = input.substr(start, *i - start);
+    for (; t_input[*t_i] != ' ' && t_input[*t_i] != ';' && *t_i < t_input.size(); (*t_i)++);
+    str = t_input.substr(start, *t_i - start);
     return str;
 }
 
-bool Parser::isAuthorized(const std::string& inputParam)
+bool Parser::isAuthorized(const std::string& t_inputParam)
 {
     std::regex pattern("x[0-9]");
 
-    for (int i = 0; i < (int)authorizedPizzas.size(); i++) {
-        if (inputParam == authorizedPizzas[i])
+    for (size_t i = 0; i < m_authorizedPizzas.size(); i++) {
+        if (t_inputParam == m_authorizedPizzas[i])
             return true;
     }
-    for (int i = 0; i < (int)authorizedSizes.size(); i++) {
-        if (inputParam == authorizedSizes[i])
+    for (size_t i = 0; i < m_authorizedSizes.size(); i++) {
+        if (t_inputParam == m_authorizedSizes[i])
             return true;
     }
-    if (std::regex_match(inputParam, pattern))
+    if (std::regex_match(t_inputParam, pattern))
         return true;
     return false;
 }
 
-bool Parser::isInVector(std::vector<std::string> t_vector, const std::string& str_to_find)
+bool Parser::isInVector(std::vector<std::string> t_vector, const std::string& t_str_to_find)
 {
-    for (int i = 0; i < (int)t_vector.size(); i++) {
-        if (t_vector[i] == str_to_find)
+    for (size_t i = 0; i < t_vector.size(); i++) {
+        if (t_vector[i] == t_str_to_find)
             return true;
     }
     return false;
 }
 
-PizzaSize Parser::stringToPizzaSize(const std::string& str)
+PizzaSize Parser::stringToPizzaSize(const std::string& t_str)
 {
-    if (str == "S") {
+    if (t_str == "S")
         return PizzaSize::S;
-    } else if (str == "M") {
+    if (t_str == "M")
         return PizzaSize::M;
-    } else if (str == "L") {
+    if (t_str == "L")
         return PizzaSize::L;
-    } else if (str == "XL") {
+    if (t_str == "XL")
         return PizzaSize::XL;
-    } else {
-        return PizzaSize::XXL;
-    }
-}
-
-std::shared_ptr<IPizza> Parser::setPizza(const std::string &pizzaName, const std::string &pizzaSize)
-{
-    if (pizzaName == "regina")
-        return std::make_shared<ReginaPizza>(stringToPizzaSize(pizzaSize));
-    else if (pizzaName == "margarita")
-        return std::make_shared<MargaritaPizza>(stringToPizzaSize(pizzaSize));
-    else if (pizzaName == "americana")
-        return std::make_shared<AmericanaPizza>(stringToPizzaSize(pizzaSize));
     else
-        return std::make_shared<FantasiaPizza>(stringToPizzaSize(pizzaSize));
+        return PizzaSize::XXL;
 }
 
-std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> inputs)
+std::shared_ptr<IPizza> Parser::setPizza(const std::string &t_pizzaName, const std::string &t_pizzaSize)
+{
+    if (t_pizzaName == "regina")
+        return std::make_shared<ReginaPizza>(stringToPizzaSize(t_pizzaSize));
+    else if (t_pizzaName == "margarita")
+        return std::make_shared<MargaritaPizza>(stringToPizzaSize(t_pizzaSize));
+    else if (t_pizzaName == "americana")
+        return std::make_shared<AmericanaPizza>(stringToPizzaSize(t_pizzaSize));
+    else
+        return std::make_shared<FantasiaPizza>(stringToPizzaSize(t_pizzaSize));
+}
+
+std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> t_inputs)
 {
     unsigned long i = 0;
     int nbPizzas = 0;
     std::vector<std::shared_ptr<IPizza>> pizzas;
     std::shared_ptr<IPizza> pizza;
 
-    if (inputs.empty())
+    if (t_inputs.empty())
         return {};
-    while (i < inputs.size()) {
-        pizza = setPizza(inputs[i], inputs[i + 1]);
-        for (int j = 0; j < (int)inputs[i + 2].size(); j++) {
-            if (isdigit(inputs[i + 2][j]))
-                nbPizzas = std::stoi(inputs[i + 2].substr(j, inputs[i + 2].size()));
+    while (i < t_inputs.size()) {
+        pizza = setPizza(t_inputs[i], t_inputs[i + 1]);
+        for (size_t j = 0; j < t_inputs[i + 2].size(); j++) {
+            if (isdigit(t_inputs[i + 2][j]))
+                nbPizzas = std::stoi(t_inputs[i + 2].substr(j, t_inputs[i + 2].size()));
         }
         for (int j = 0; j < nbPizzas; j++)
             pizzas.push_back(pizza);
@@ -103,13 +102,13 @@ std::vector<std::shared_ptr<IPizza>> Parser::getInput()
     std::vector<std::string> authorized_inputs;
 
     std::getline(std::cin, input);
-    for (int i = 0; i < (int)input.size();) {
+    for (size_t i = 0; i < input.size();) {
         inputParam = getInputString(input, &i);
         if (isAuthorized(inputParam))
             authorized_inputs.push_back(inputParam);
         else
-            return {};
-        while ((input[i] == ' ' || input[i] == ';') && i < (int)input.size())
+            return std::vector<std::shared_ptr<IPizza>>();
+        while ((input[i] == ' ' || input[i] == ';') && i < input.size())
             i++;
     }
     return setPizzas(authorized_inputs);
