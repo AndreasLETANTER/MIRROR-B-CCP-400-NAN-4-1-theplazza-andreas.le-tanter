@@ -117,3 +117,27 @@ Test(string_not_in_vector, isInVector)
 
     cr_assert_eq(parser.isInVector(vector, str), false);
 }
+
+Test(Pizza, StringToPizzaSize)
+{
+    Parser parser;
+    std::string input1 = "S";
+    PizzaSize result1 = parser.stringToPizzaSize(input1);
+    cr_assert_eq(result1, PizzaSize::S);
+
+    std::string input2 = "M";
+    PizzaSize result2 = parser.stringToPizzaSize(input2);
+    cr_assert_eq(result2, PizzaSize::M);
+
+    std::string input3 = "L";
+    PizzaSize result3 = parser.stringToPizzaSize(input3);
+    cr_assert_eq(result3, PizzaSize::L);
+
+    std::string input4 = "XL";
+    PizzaSize result4 = parser.stringToPizzaSize(input4);
+    cr_assert_eq(result4, PizzaSize::XL);
+
+    std::string input5 = "XXL";
+    PizzaSize result5 = parser.stringToPizzaSize(input5);
+    cr_assert_eq(result5, PizzaSize::XXL);
+}
