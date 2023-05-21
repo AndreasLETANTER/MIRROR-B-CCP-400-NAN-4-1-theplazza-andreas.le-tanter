@@ -175,3 +175,53 @@ Test(Pizza, setPizza)
     cr_assert_eq(result5->getSize(), PizzaSize::XXL);
     cr_assert_eq(result5->getType(), PizzaType::Regina);
 }
+
+Test(vector_of_unique_valid_pizzas, setPizzas)
+{
+    std::vector<std::string> input = {"regina", "S", "x1", "margarita", "M", "x1"};
+    Parser parser;
+    std::vector<std::shared_ptr<IPizza>> result = parser.setPizzas(input);
+
+    cr_assert_eq(result[0]->getSize(), PizzaSize::S);
+    cr_assert_eq(result[0]->getType(), PizzaType::Regina);
+
+    cr_assert_eq(result[1]->getSize(), PizzaSize::M);
+    cr_assert_eq(result[1]->getType(), PizzaType::Margarita);
+}
+
+Test(vector_of_multiple_valid_pizzas, setPizzas)
+{
+    std::vector<std::string> input = {"regina", "S", "x2", "margarita", "M", "x2"};
+    Parser parser;
+    std::vector<std::shared_ptr<IPizza>> result = parser.setPizzas(input);
+
+    cr_assert_eq(result[0]->getSize(), PizzaSize::S);
+    cr_assert_eq(result[0]->getType(), PizzaType::Regina);
+
+    cr_assert_eq(result[1]->getSize(), PizzaSize::S);
+    cr_assert_eq(result[1]->getType(), PizzaType::Regina);
+
+    cr_assert_eq(result[2]->getSize(), PizzaSize::M);
+    cr_assert_eq(result[2]->getType(), PizzaType::Margarita);
+
+    cr_assert_eq(result[3]->getSize(), PizzaSize::M);
+    cr_assert_eq(result[3]->getType(), PizzaType::Margarita);
+}
+
+Test(vector_of_invalid_pizzas, setPizzas)
+{
+    std::vector<std::string> input = {"reginaaa", "S", "x1", "margaritaaaa", "M", "x1"};
+    Parser parser;
+    std::vector<std::shared_ptr<IPizza>> result = parser.setPizzas(input);
+
+    cr_assert_eq(result.empty(), true);
+}
+
+Test(vector_of_invalid_and_valid_pizzas, setPizzas)
+{
+    std::vector<std::string> input = {"reginaaa", "S", "x1", "margarita", "M", "x1"};
+    Parser parser;
+    std::vector<std::shared_ptr<IPizza>> result = parser.setPizzas(input);
+
+    cr_assert_eq(result.empty(), true);
+}
