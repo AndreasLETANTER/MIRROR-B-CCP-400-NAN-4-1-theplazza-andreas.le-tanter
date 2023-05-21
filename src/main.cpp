@@ -14,10 +14,11 @@
 static void print_help_if_needed(const int ac)
 {
     if (ac != 4) {
-        std::cout << "USAGE: ./plazza [multiplier] [nb_cooks] [time]" << std::endl;
-        std::cout << "\tmultiplier\tmultiplier for the cooking time of the pizzas" << std::endl;
-        std::cout << "\tnb_cooks\tnumber of cooks per kitchen" << std::endl;
-        std::cout << "\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients" << std::endl;
+        std::cout << "USAGE: ./plazza [multiplier] [nb_cooks] [time]\n"
+                    << "\tmultiplier\tmultiplier for the cooking time of the pizzas\n"
+                    << "\tnb_cooks\tnumber of cooks per kitchen\n"
+                    << "\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients"
+                    << std::endl;
         exit(EXIT_SUCCESS);
     }
 }
