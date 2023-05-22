@@ -18,7 +18,9 @@
  */
 static void pantryRoutine(std::shared_ptr<IPantry> t_pantry, int t_timeMilliseconds, std::shared_ptr<IMutex> t_mutex)
 {
-    while (true) {
+    bool pantryRefilling = true;
+
+    while (pantryRefilling) {
         std::this_thread::sleep_for(std::chrono::milliseconds(t_timeMilliseconds));
         t_mutex->lock();
         t_pantry->addIngredient(PizzaIngredient::Dough, 1);
