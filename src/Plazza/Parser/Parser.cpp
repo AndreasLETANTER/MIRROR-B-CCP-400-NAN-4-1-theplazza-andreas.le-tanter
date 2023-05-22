@@ -16,7 +16,7 @@
  * @details get string from input, starting from index and terminating at delimiter or input end
  * @param t_input input from user
  * @param t_i input index
- * @return
+ * @return a string containing an input param
  */
 std::string Parser::getInputString(std::string t_input, size_t *t_i)
 {
@@ -28,6 +28,12 @@ std::string Parser::getInputString(std::string t_input, size_t *t_i)
     return str;
 }
 
+/**
+ * @brief check if a string is authorized
+ * @details check if string passed as parameter match entries in different string vectors
+ * @param t_inputParam parsed input parameter
+ * @return a boolean
+ */
 bool Parser::isAuthorized(const std::string& t_inputParam)
 {
     std::regex pattern("x[0-9]");
@@ -45,6 +51,12 @@ bool Parser::isAuthorized(const std::string& t_inputParam)
     return false;
 }
 
+/**
+ * @brief check if a string is in a vector
+ * @param t_vector reference vector
+ * @param t_str_to_find string to find
+ * @return a boolean
+ */
 bool Parser::isInVector(std::vector<std::string> t_vector, const std::string& t_str_to_find)
 {
     for (size_t i = 0; i < t_vector.size(); i++) {
@@ -54,6 +66,11 @@ bool Parser::isInVector(std::vector<std::string> t_vector, const std::string& t_
     return false;
 }
 
+/**
+ * @brief convert a string into a PizzaSize type
+ * @param t_str pizza size as a string
+ * @return a PizzaSize type
+ */
 PizzaSize Parser::stringToPizzaSize(const std::string& t_str)
 {
     if (t_str == "S")
@@ -68,6 +85,12 @@ PizzaSize Parser::stringToPizzaSize(const std::string& t_str)
         return PizzaSize::XXL;
 }
 
+/**
+ * @brief set a Pizza, with a name and a size, and return it
+ * @param t_pizzaName name of the pizza
+ * @param t_pizzaSize size of the pizza
+ * @return shared pointer of IPizza type
+ */
 std::shared_ptr<IPizza> Parser::setPizza(const std::string &t_pizzaName, const std::string &t_pizzaSize)
 {
     if (t_pizzaName == "regina")
@@ -80,6 +103,11 @@ std::shared_ptr<IPizza> Parser::setPizza(const std::string &t_pizzaName, const s
         return std::make_shared<FantasiaPizza>(stringToPizzaSize(t_pizzaSize));
 }
 
+/**
+ * @brief set all pizzas contained in t_inputs
+ * @param t_inputs string vector containing all inputs to set pizzas
+ * @return vector of shared pointers of IPizza type
+ */
 std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> t_inputs)
 {
     unsigned long i = 0;
@@ -102,6 +130,11 @@ std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> 
     return pizzas;
 }
 
+/**
+ * @brief get input from user
+ * @details get input from user, parse it, handle errors and create a vector of shared pointers of IPizza type
+ * @return result of setPizza() : vector of shared pointers of IPizza type
+ */
 std::vector<std::shared_ptr<IPizza>> Parser::getInput()
 {
     std::string input;
