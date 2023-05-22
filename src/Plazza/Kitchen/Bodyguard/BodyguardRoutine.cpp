@@ -13,7 +13,7 @@
  * @details This function exit all the cooks
  * @param m_cookPool the pool of cooks
 */
-static void exitALlCooks(std::vector<std::shared_ptr<IThread>> t_cookPool)
+static void exitAllCooks(std::vector<std::shared_ptr<IThread>> t_cookPool)
 {
     for (auto &cook : t_cookPool) {
         cook->stopThread();
@@ -41,7 +41,7 @@ void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> t_cookPool, bool *t_
         t_mutex->unlock();
         if (nbPizza == 0) {
             if (timer.GetElapsedTime() >= 5) {
-                exitALlCooks(t_cookPool);
+                exitAllCooks(t_cookPool);
                 t_mutex->lock();
                 *t_kitchenNeedExit = true;
                 kitchenNeedExit = true;
