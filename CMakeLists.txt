@@ -35,6 +35,7 @@ set(TESTS
     tests/PizzaClass/MargaritaPizza.cpp
     tests/PizzaClass/ReginaPizza.cpp
     tests/KitchenClass/PantryClass/Pantry.cpp
+    tests/ParserClass.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################

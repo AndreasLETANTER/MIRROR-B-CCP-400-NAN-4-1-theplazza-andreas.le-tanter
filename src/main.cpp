@@ -5,30 +5,55 @@
 ** main
 */
 
-#include <vector>
-#include <thread>
 #include <iostream>
-#include <memory>
-#include "IThread/Thread.hpp"
-#include "IMutex/Mutex.hpp"
-#include "IMutex/ScopedLock/ScopedLock.hpp"
-#include "ISafeQueue/SafeQueue.hpp"
-#include "Plazza/Kitchen/Kitchen.hpp"
-#include "Plazza/Pizza/Americana/AmericanaPizza.hpp"
-#include "Plazza/Pizza/Fantasia/FantasiaPizza.hpp"
-#include "Plazza/Pizza/Margarita/MargaritaPizza.hpp"
-#include "Plazza/Pizza/Regina/ReginaPizza.hpp"
+#include <string>
 
-int main(const int argc, const char **argv)
+#define EXIT_SUCCESS 0
+#define EXIT_ERROR 84
+
+static void print_help_if_needed(const int ac)
 {
-    (void)argc;
-    std::unique_ptr<IKitchen> kitchen = std::make_unique<Kitchen>(atoi(argv[1]), (double) atof(argv[2]));
-
-    kitchen->createPantry();
-    for (int i = 0; i < 10; i++) {
-        if (kitchen->isKitchenFilled() == false && kitchen->checkPantry(std::make_shared<ReginaPizza>(PizzaSize::M)->getIngredients()))
-            kitchen->addPizzaToPool(std::make_shared<ReginaPizza>(PizzaSize::M));
+    if (ac != 4) {
+        std::cout << "USAGE: ./plazza [multiplier] [nb_cooks] [time]\n"
+                    << "\tmultiplier\tmultiplier for the cooking time of the pizzas\n"
+                    << "\tnb_cooks\tnumber of cooks per kitchen\n"
+                    << "\ttime\ttime in milliseconds, used by the kitchen stock to replace ingredients"
+                    << std::endl;
+        exit(EXIT_SUCCESS);
     }
-    kitchen->createCooks();
-    return 0;
+}
+
+static bool is_number(const std::string &str)
+{
+    if (str.empty()) {
+        return false;
+    }
+    for (const char &c : str) {
+        if (!std::isdigit(c) && c != '.') {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(const int ac, const char **av)
+{
+    double multiplier = 0;
+    int number_of_cooks = 0;
+    int refilling_time = 0;
+
+    print_help_if_needed(ac);
+    if (!is_number(av[1]) || !is_number(av[2]) || !is_number(av[3])) {
+        std::cerr << "Arguments must be numbers" << std::endl;
+        return EXIT_ERROR;
+    }
+    multiplier = std::stod(av[1]);
+    number_of_cooks = std::stoul(av[2]);
+    refilling_time = std::stoul(av[3]);
+    if (multiplier <= 0 || number_of_cooks <= 0 || refilling_time <= 0) {
+        std::cerr << "Arguments must be positive" << std::endl;
+        return EXIT_ERROR;
+    }
+    // Reception class
+    return EXIT_SUCCESS;
 }
