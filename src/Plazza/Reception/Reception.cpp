@@ -7,18 +7,26 @@
 
 #include "Reception.hpp"
 #include "../Parser/Parser.hpp"
-#include "Kitchen/Kitchen.hpp"
+#include "../Kitchen/Kitchen.hpp"
 
 #include <iostream>
 #include <unistd.h>
 
-Reception::Reception() : m_queue(std::make_shared<Mutex>())
+Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refillTime)
 {
     m_is_running = true;
+    m_multiplier = multiplier;
+    m_nbCooks = nbCooks;
+    m_refillTime = refillTime;
+    m_mutex = std::make_shared<Mutex>();
+    m_queue = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(m_mutex);
+    m_file.open("Pizza.log", std::ios::out);
+    waitCommands();
 }
 
 Reception::~Reception()
 {
+    m_file.close();
 }
 
 void Reception::waitCommands()
@@ -45,21 +53,21 @@ void Reception::sendPizzaToQueue(std::shared_ptr<IPizza> pizza)
     if (pizza == nullptr)
         return;
     try {
-        m_file.open("", std::ios::out | std::ios::app);
-        m_file << "Pizza : " << pizza->getSize() << " | Type : " << pizza->getType();
-        m_file.close();
+        m_file << "Pizza type : " << pizza->getType() << " size : " << pizza->getSize() << std::endl;
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
-    m_queue.push(pizza);
+    m_queue->push(pizza);
 }
 
 void Reception::createKitchen()
 {
+    pid_t pid;
+
     try {
-        pid_t pid = fork();
+        pid = fork();
         if (pid == 0) {
-            Kitchen kitchen(nb cook, time multiple)
+            Kitchen kitchen(m_nbCooks, m_multiplier, m_refillTime);
         }
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
@@ -68,6 +76,5 @@ void Reception::createKitchen()
 
 void Reception::sendPizzaToKitchen()
 {
-    // isKitchen filled
-    // check pentry
+    addPizzaToPool()
 }

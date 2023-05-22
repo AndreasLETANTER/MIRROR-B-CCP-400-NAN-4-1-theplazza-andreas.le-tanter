@@ -21,7 +21,7 @@ class Reception : public IReception {
          * @brief Constructor of the reception class
          * @details this function create a reception with a parser and a safe queue
         */
-        Reception();
+        Reception(double multiplier, unsigned int nbCooks, unsigned int refillTime);
         /**
          * @brief Destructor of the reception class
          * @details this function destroy the reception
@@ -51,6 +51,11 @@ class Reception : public IReception {
     private:
         bool m_is_running;
         std::string m_command;
-        SafeQueue<std::shared_ptr<IPizza>> m_queue;
+        std::shared_ptr<IMutex> m_mutex;
+        std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_queue;
         std::fstream m_file;
+        double m_multiplier;
+        unsigned int m_nbCooks;
+        unsigned int m_refillTime;
+
 };
