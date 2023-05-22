@@ -11,6 +11,13 @@
 #include "../Pizza/Regina/ReginaPizza.hpp"
 #include <iostream>
 
+/**
+ * @brief get a string from the input
+ * @details get string from input, starting from index and terminating at delimiter or input end
+ * @param t_input input from user
+ * @param t_i input index
+ * @return
+ */
 std::string Parser::getInputString(std::string t_input, size_t *t_i)
 {
     std::string str;
