@@ -13,9 +13,9 @@
  * @details This function exit all the cooks
  * @param m_cookPool the pool of cooks
 */
-static void exitALlCooks(std::vector<std::shared_ptr<IThread>> m_cookPool)
+static void exitALlCooks(std::vector<std::shared_ptr<IThread>> t_cookPool)
 {
-    for (auto &cook : m_cookPool) {
+    for (auto &cook : t_cookPool) {
         cook->stopThread();
     }
 }
@@ -28,7 +28,7 @@ static void exitALlCooks(std::vector<std::shared_ptr<IThread>> m_cookPool)
  * @param t_nbPizzaMax the number of pizza max that the kitchen can cook
  * @param t_mutex the mutex for the number of pizza max
 */
-void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
+void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> t_cookPool, bool *t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
 {
     Timer timer;
     timer.StartTimer();
@@ -41,7 +41,7 @@ void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_
         t_mutex->unlock();
         if (nbPizza == 0) {
             if (timer.GetElapsedTime() >= 5) {
-                exitALlCooks(m_cookPool);
+                exitALlCooks(t_cookPool);
                 t_mutex->lock();
                 *t_kitchenNeedExit = true;
                 kitchenNeedExit = true;
