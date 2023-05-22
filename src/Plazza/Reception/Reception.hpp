@@ -9,6 +9,7 @@
 
 #include "IReception.hpp"
 #include "../../ISafeQueue/SafeQueue.hpp"
+#include "../Kitchen/Kitchen.hpp"
 
 #include <fstream>
 
@@ -53,6 +54,7 @@ class Reception : public IReception {
         std::string m_command;
         std::shared_ptr<IMutex> m_mutex;
         std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_queue;
+        std::vector<std::shared_ptr<IKitchen>> m_kitchens;
         std::fstream m_file;
         double m_multiplier;
         unsigned int m_nbCooks;
