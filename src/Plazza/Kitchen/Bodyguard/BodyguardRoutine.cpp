@@ -33,8 +33,9 @@ void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_
     Timer timer;
     timer.StartTimer();
     size_t nbPizza = 0;
+    bool kitchenNeedExit = false;
 
-    while (true) {
+    while (kitchenNeedExit == false) {
         t_mutex->lock();
         nbPizza = *t_nbPizzaMax;
         t_mutex->unlock();
@@ -43,8 +44,9 @@ void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_
                 exitALlCooks(m_cookPool);
                 t_mutex->lock();
                 *t_kitchenNeedExit = true;
+                kitchenNeedExit = true;
                 t_mutex->unlock();
-                return;
+                continue;
             }
         } else if (nbPizza > 0) {
             timer.ResetTimer();
