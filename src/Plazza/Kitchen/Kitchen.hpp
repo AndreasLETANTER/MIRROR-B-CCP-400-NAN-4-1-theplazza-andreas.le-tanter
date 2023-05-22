@@ -65,12 +65,12 @@ class Kitchen : public IKitchen {
         int m_refillTime;
         std::shared_ptr<IPantry> m_pantry;
         std::shared_ptr<IMutex> _mutex = std::make_shared<Mutex>();
-        std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_pizzaPool = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(_mutex);
-        std::vector<std::shared_ptr<IThread>> m_cookPool;
-        std::unique_ptr<IThread> m_pantryThread;
         std::shared_ptr<IMutex> m_pantryMutex = std::make_shared<Mutex>();
-        std::unique_ptr<IThread> m_kitchenBodyguard;
         std::shared_ptr<IMutex> m_kitchenMutex = std::make_shared<Mutex>();
+        std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_pizzaPool = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(_mutex);
+        std::unique_ptr<IThread> m_kitchenBodyguard;
+        std::unique_ptr<IThread> m_pantryThread;
+        std::vector<std::shared_ptr<IThread>> m_cookPool;
         bool m_kitchenNeedExit;
         double m_timeMultiplier;
         size_t m_nbCook;
