@@ -18,7 +18,9 @@
 */
 void cookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
 {
-    while (true) {
+    bool cookWorking = true;
+
+    while (cookWorking) {
         auto pizza = t_pizzaPool->pop();
         double cookingTime = pizza->getCookingTime();
         unsigned int timeMilliseconds = (cookingTime * t_timeMultiplier) * 1000;
