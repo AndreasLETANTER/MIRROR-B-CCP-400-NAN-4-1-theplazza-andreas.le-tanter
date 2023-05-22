@@ -12,6 +12,7 @@ set(SRC
     src/Timer/Timer.cpp
     src/IMutex/Mutex.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
+    src/Plazza/Parser/Parser.cpp
     src/Plazza/Pizza/APizza.cpp
     src/Plazza/Pizza/Margarita/MargaritaPizza.cpp
     src/Plazza/Pizza/Regina/ReginaPizza.cpp
@@ -36,6 +37,7 @@ set(TESTS
     tests/PizzaClass/ReginaPizza.cpp
     tests/KitchenClass/PantryClass/Pantry.cpp
     tests/KitchenClass/Kitchen.cpp
+    tests/ParserClass.cpp
 )
 
 ###############################COMPILATION MAIN PROGRAM###########################
