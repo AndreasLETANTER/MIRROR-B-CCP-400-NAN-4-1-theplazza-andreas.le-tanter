@@ -16,7 +16,7 @@
  * @param t_nbPizzaMax the number of pizza max that the kitchen can cook
  * @param t_mutex the mutex for the number of pizza max
 */
-void CookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
+void cookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
 {
     while (true) {
         auto pizza = t_pizzaPool->pop();

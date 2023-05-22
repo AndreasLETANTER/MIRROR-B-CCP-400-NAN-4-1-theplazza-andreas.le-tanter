@@ -52,7 +52,7 @@ Kitchen::Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refill
     createPantry();
     createCooks();
     m_pantryThread = std::make_unique<Thread<decltype(PantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(PantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
-    m_kitchenBodyguard = std::make_unique<Thread<decltype(BodyguardRoutine), decltype(m_cookPool), decltype(&m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(BodyguardRoutine, m_cookPool, &m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
+    m_kitchenBodyguard = std::make_unique<Thread<decltype(bodyguardRoutine), decltype(m_cookPool), decltype(&m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(bodyguardRoutine, m_cookPool, &m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
 }
 
 /**
@@ -71,7 +71,7 @@ Kitchen::~Kitchen()
 void Kitchen::createCooks()
 {
     for (size_t i = 0; i < m_nbCook; i++) {
-        m_cookPool.push_back(std::make_shared<Thread<decltype(CookRoutine), double, decltype(m_pizzaPool), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(CookRoutine, m_timeMultiplier, m_pizzaPool, &m_nbPizza, m_kitchenMutex));
+        m_cookPool.push_back(std::make_shared<Thread<decltype(cookRoutine), double, decltype(m_pizzaPool), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(cookRoutine, m_timeMultiplier, m_pizzaPool, &m_nbPizza, m_kitchenMutex));
     }
 }
 
