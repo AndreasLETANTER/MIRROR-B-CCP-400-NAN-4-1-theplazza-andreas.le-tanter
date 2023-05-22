@@ -34,11 +34,11 @@ Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier, int t_refillTime)
     m_nbPizzaMax = t_nbCook * 2;
     m_refillTime = t_refillTime;
     m_pantryMutex = std::make_shared<Mutex>();
-    m_kitchenNeedExit = std::make_shared<bool>(false);
+    m_kitchenNeedExit = false;
     createPantry();
     createCooks();
     m_pantryThread = std::make_unique<Thread<decltype(PantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(PantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
-    m_kitchenBodyguard = std::make_unique<Thread<decltype(BodyguardRoutine), decltype(m_cookPool), decltype(m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(BodyguardRoutine, m_cookPool, m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
+    m_kitchenBodyguard = std::make_unique<Thread<decltype(BodyguardRoutine), decltype(m_cookPool), decltype(&m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(BodyguardRoutine, m_cookPool, &m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
 }
 
 Kitchen::~Kitchen()
@@ -74,7 +74,12 @@ bool Kitchen::checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded)
 
 bool Kitchen::isKitchenFilled()
 {
-    if (m_pizzaPool->size() == m_nbPizzaMax)
+    size_t nbPizza = 0;
+
+    m_kitchenMutex->lock();
+    nbPizza = m_nbPizza;
+    m_kitchenMutex->unlock();
+    if (nbPizza == m_nbPizzaMax)
         return true;
     return false;
 }
@@ -94,5 +99,5 @@ void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
 
 bool Kitchen::doesKitchenNeedExit()
 {
-    return *m_kitchenNeedExit;
+    return m_kitchenNeedExit;
 }

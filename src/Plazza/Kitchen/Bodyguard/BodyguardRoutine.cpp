@@ -14,8 +14,8 @@ static void exitALlCooks(std::vector<std::shared_ptr<IThread>> m_cookPool)
         cook->stopThread();
     }
 }
-#include <iostream>
-void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, std::shared_ptr<bool> t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
+
+void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
 {
     Timer timer;
     timer.StartTimer();
@@ -28,7 +28,9 @@ void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, std::sha
         if (nbPizza == 0) {
             if (timer.GetElapsedTime() >= 5) {
                 exitALlCooks(m_cookPool);
+                t_mutex->lock();
                 *t_kitchenNeedExit = true;
+                t_mutex->unlock();
                 return;
             }
         } else if (nbPizza > 0) {
