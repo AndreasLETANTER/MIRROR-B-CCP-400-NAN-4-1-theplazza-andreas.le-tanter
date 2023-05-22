@@ -21,7 +21,7 @@ class Kitchen : public IKitchen {
          * @param t_timeMultiplier the multiplier for the cooking time
          * @param t_refillTime the refill time for the pantry
          */
-        Kitchen(int t_nbCook, double t_timeMultiplier, int t_refillTime);
+        Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refillTime);
         /**
          * @brief Destroy the Kitchen:: Kitchen object
          * @details Destroy the Kitchen:: Kitchen object and join the thread of the cooks and the pantry

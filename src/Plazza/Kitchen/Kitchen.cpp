@@ -41,7 +41,7 @@ static void PantryRoutine(std::shared_ptr<IPantry> t_pantry, int t_timeMilliseco
  * @param t_timeMultiplier the multiplier for the cooking time
  * @param t_refillTime the refill time for the pantry
 */
-Kitchen::Kitchen(int t_nbCook, double t_timeMultiplier, int t_refillTime)
+Kitchen::Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refillTime)
 {
     m_nbCook = t_nbCook;
     m_timeMultiplier = t_timeMultiplier;
