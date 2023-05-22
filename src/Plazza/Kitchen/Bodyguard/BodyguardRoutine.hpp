@@ -16,4 +16,4 @@
  * @param t_nbPizzaMax the number of pizza max that the kitchen can cook
  * @param t_mutex the mutex for the number of pizza max
 */
-void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> m_cookPool, bool *t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex);
+void BodyguardRoutine(std::vector<std::shared_ptr<IThread>> t_cookPool, bool *t_kitchenNeedExit, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex);
