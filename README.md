@@ -49,3 +49,5 @@ or
 - [@HugoN1](https://github.com/HugoN1)
 - [@Andréas LE TANTER](https://github.com/AndreasLETANTER)
 
+## Documentation
+All our code is compatible with Doxygen
