@@ -49,6 +49,7 @@ void SafeQueue<T>::push(T value)
     ScopedLock lock(m_mutex);
 
     m_queue.push(value);
+    m_cond.notify_one();
 }
 
 /**
@@ -79,9 +80,8 @@ bool SafeQueue<T>::tryPop(T &value)
 template <typename T>
 T SafeQueue<T>::pop()
 {
-    ScopedLock _scopedLock(m_mutex);
     std::mutex _mutex;
-    std::unique_lock<std::mutex> _lock(_mutex);
+    std::unique_lock<std::mutex> _lock(m_mutex->getMutex());
     T value;
 
     while (m_queue.empty())
@@ -89,4 +89,17 @@ T SafeQueue<T>::pop()
     value = m_queue.front();
     m_queue.pop();
     return value;
+}
+
+/**
+ * @brief get the size of the queue
+ * @tparam T type of the queue
+ * @return size_t size of the queue
+*/
+template <typename T>
+size_t SafeQueue<T>::size()
+{
+    ScopedLock lock(m_mutex);
+
+    return m_queue.size();
 }

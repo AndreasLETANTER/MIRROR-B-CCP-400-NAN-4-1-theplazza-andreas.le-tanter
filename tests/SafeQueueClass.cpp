@@ -99,3 +99,22 @@ Test(SafeQueue, Massive_value)
     cr_assert_eq(value, 10000);
     cr_assert_eq(queue->tryPop(value), false);
 }
+
+Test(SafeQueue, Basic_Size)
+{
+    int value = 0;
+    std::shared_ptr<IMutex> _mutex = std::make_shared<Mutex>();
+    std::shared_ptr<ISafeQueue<int>> queue = std::make_shared<SafeQueue<int>>(_mutex);
+
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    queue->push(value);
+    cr_assert_eq(queue->size(), 10);
+}
