@@ -20,36 +20,36 @@ class Timer : public ITimer {
          * @brief Start the timer
          * @details Start the timer and set the _is_started boolean to true
         */
-        void StartTimer() override;
+        void startTimer() override;
         /**
          * @brief Get the Elapsed Time object
          * @details Get the elapsed time in seconds
          * @return double
         */
-        double GetElapsedTime() override;
+        double getElapsedTime() override;
         /**
          * @brief Get the Elapsed Time In Milli Seconds object
          * @details Get the elapsed time in milliseconds
          * @return double
         */
-        double GetElapsedTimeInMilliSeconds() override;
+        double getElapsedTimeInMilliSeconds() override;
         /**
          * @brief Get the Elapsed Time In Micro Seconds object
          * @details Get the elapsed time in microseconds
          * @return double
         */
-        double GetElapsedTimeInMicroSeconds() override;
+        double getElapsedTimeInMicroSeconds() override;
         /**
          * @brief Reset the timer
          * @details Reset the timer and set the _is_started boolean to false
         */
-        void ResetTimer() override;
+        void resetTimer() override;
         /**
          * @brief Check if the timer is started
          * @return true if the timer is started
          * @return false if the timer is not started 
          */
-        bool IsStarted() override { return m_is_started; };
+        bool isStarted() override { return m_is_started; };
 
     protected:
     private:
