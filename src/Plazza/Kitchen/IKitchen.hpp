@@ -15,6 +15,10 @@
 */
 class IKitchen {
     public:
+        /**
+         * @brief Destroy the Kitchen:: Kitchen object
+         * @details Destroy the Kitchen:: Kitchen object and join the thread of the cooks and the pantry
+        */
         virtual ~IKitchen() = default;
         /**
          * @brief Create a Cook object (thread that cook the pizza)
@@ -33,6 +37,7 @@ class IKitchen {
         virtual bool checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded) = 0;
         /**
          * @brief Check if the kitchen is filled (if the pool is full or not)
+         * @return true if the kitchen is filled
         */
         virtual bool isKitchenFilled() = 0;
         /**
