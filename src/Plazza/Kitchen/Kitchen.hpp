@@ -52,7 +52,7 @@ class Kitchen : public IKitchen {
          * @return true if the kitchen need to exit
          * @return false if the kitchen doesn't need to exit
         */
-        bool doesKitchenNeedExit() override;
+        bool isExitNeeded() override;
         /**
          * @brief Add a pizza to the pool
          * @param t_pizza the pizza to add to the pool

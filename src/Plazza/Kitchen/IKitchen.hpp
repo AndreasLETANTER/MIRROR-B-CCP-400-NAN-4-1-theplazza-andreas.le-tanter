@@ -51,7 +51,7 @@ class IKitchen {
          * @return true if the kitchen need to exit
          * @return false if the kitchen doesn't need to exit
         */
-        virtual bool doesKitchenNeedExit() = 0;
+        virtual bool isExitNeeded() = 0;
 
     protected:
     private:

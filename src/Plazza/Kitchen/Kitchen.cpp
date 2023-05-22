@@ -141,7 +141,7 @@ void Kitchen::addPizzaToPool(std::shared_ptr<IPizza> t_pizza)
  * @return true if the kitchen need to exit
  * @return false if the kitchen doesn't need to exit
 */
-bool Kitchen::doesKitchenNeedExit()
+bool Kitchen::isExitNeeded()
 {
     return m_kitchenNeedExit;
 }

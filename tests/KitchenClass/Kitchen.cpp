@@ -44,12 +44,12 @@ Test(Kitchen, Basic_addPizza, .init = cr_redirect_stdout)
     kitchen->addPizzaToPool(pizza);
     kitchen->addPizzaToPool(pizza);
     cr_assert_eq(kitchen->isKitchenFilled(), true);
-    cr_assert_eq(kitchen->doesKitchenNeedExit(), false);
+    cr_assert_eq(kitchen->isExitNeeded(), false);
     cr_assert_eq(kitchen->checkPantry(pizza->getIngredients()), true);
     sleep(3);
     cr_assert_eq(kitchen->isKitchenFilled(), false);
     sleep(7);
-    cr_assert_eq(kitchen->doesKitchenNeedExit(), true);
+    cr_assert_eq(kitchen->isExitNeeded(), true);
 }
 
 Test(Kitchen, Nothing, .init = cr_redirect_stdout)
@@ -57,7 +57,7 @@ Test(Kitchen, Nothing, .init = cr_redirect_stdout)
     std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(1, 1, 1000);
 
     sleep(5);
-    cr_assert_eq(kitchen->doesKitchenNeedExit(), true);
+    cr_assert_eq(kitchen->isExitNeeded(), true);
 }
 
 Test(Kitchen, emptyPantry, .init = cr_redirect_stdout)
@@ -71,11 +71,11 @@ Test(Kitchen, emptyPantry, .init = cr_redirect_stdout)
     kitchen->addPizzaToPool(pizza);
     kitchen->addPizzaToPool(pizza);
     cr_assert_eq(kitchen->isKitchenFilled(), false);
-    cr_assert_eq(kitchen->doesKitchenNeedExit(), false);
+    cr_assert_eq(kitchen->isExitNeeded(), false);
     cr_assert_eq(kitchen->checkPantry(pizza->getIngredients()), false);
     sleep(2);
     cr_assert_eq(kitchen->isKitchenFilled(), false);
     cr_assert_eq(kitchen->checkPantry(pizza->getIngredients()), true);
     sleep(8);
-    cr_assert_eq(kitchen->doesKitchenNeedExit(), true);
+    cr_assert_eq(kitchen->isExitNeeded(), true);
 }
