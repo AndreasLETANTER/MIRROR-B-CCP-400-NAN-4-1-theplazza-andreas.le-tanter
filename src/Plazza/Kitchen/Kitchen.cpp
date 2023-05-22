@@ -16,7 +16,7 @@
  * @param t_timeMilliseconds the time in milliseconds between each refill
  * @param t_mutex the mutex for the pantry
  */
-static void PantryRoutine(std::shared_ptr<IPantry> t_pantry, int t_timeMilliseconds, std::shared_ptr<IMutex> t_mutex)
+static void pantryRoutine(std::shared_ptr<IPantry> t_pantry, int t_timeMilliseconds, std::shared_ptr<IMutex> t_mutex)
 {
     while (true) {
         std::this_thread::sleep_for(std::chrono::milliseconds(t_timeMilliseconds));
@@ -51,7 +51,7 @@ Kitchen::Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refill
     m_kitchenNeedExit = false;
     createPantry();
     createCooks();
-    m_pantryThread = std::make_unique<Thread<decltype(PantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(PantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
+    m_pantryThread = std::make_unique<Thread<decltype(pantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(pantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
     m_kitchenBodyguard = std::make_unique<Thread<decltype(bodyguardRoutine), decltype(m_cookPool), decltype(&m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(bodyguardRoutine, m_cookPool, &m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
 }
 
