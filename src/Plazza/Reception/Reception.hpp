@@ -37,7 +37,7 @@ class Reception : public IReception {
          * @brief Send the pizza to the queue
          * @details this function send the pizza to safe queue for the kitchen
         */
-        void sendPizzaToQueue(std::shared_ptr<IPizza> pizza) override;
+        void savePizzaToLog(std::shared_ptr<IPizza> pizza) override;
         /**
          * @brief Create a kitchen
          * @details this function create a kitchen with a cook and a pantry
@@ -46,14 +46,12 @@ class Reception : public IReception {
         /**
          * @brief send the pizza to be cooked in a kitchen
         */
-        void sendPizzaToKitchen() override;
+        void sendPizzaToKitchen(std::shared_ptr<IPizza> pizza) override;
 
     protected:
     private:
         bool m_is_running;
         std::string m_command;
-        std::shared_ptr<IMutex> m_mutex;
-        std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> m_queue;
         std::vector<std::shared_ptr<IKitchen>> m_kitchens;
         std::fstream m_file;
         double m_multiplier;

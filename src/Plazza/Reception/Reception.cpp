@@ -25,8 +25,6 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
     m_multiplier = multiplier;
     m_nbCooks = nbCooks;
     m_refillTime = refillTime;
-    m_mutex = std::make_shared<Mutex>();
-    m_queue = std::make_shared<SafeQueue<std::shared_ptr<IPizza>>>(m_mutex);
     m_file.open("Pizza.log", std::ios::out);
     waitCommands();
 }
@@ -52,8 +50,8 @@ void Reception::waitCommands()
     while (m_is_running) {
         pizzas = parser.getInput();
         for (auto &i : pizzas) {
-            sendPizzaToQueue(i);
-            sendPizzaToKitchen();
+            savePizzaToLog(i);
+            sendPizzaToKitchen(i);
         }
     }
 }
@@ -64,7 +62,7 @@ void Reception::waitCommands()
  * @details this function check if the pizza is not null
  * @param pizza the pizza to send
 */
-void Reception::sendPizzaToQueue(std::shared_ptr<IPizza> pizza)
+void Reception::savePizzaToLog(std::shared_ptr<IPizza> pizza)
 {
     if (pizza == nullptr) {
         return;
@@ -75,7 +73,6 @@ void Reception::sendPizzaToQueue(std::shared_ptr<IPizza> pizza)
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
-    m_queue->push(pizza);
 }
 
 void Reception::createKitchen()
@@ -90,16 +87,14 @@ void Reception::createKitchen()
     }
 }
 
-void Reception::sendPizzaToKitchen()
+void Reception::sendPizzaToKitchen(std::shared_ptr<IPizza> t_pizza)
 {
-    std::shared_ptr<IPizza> pizza = m_queue->pop();
-
     for (auto &kitchen : m_kitchens) {
-        if (kitchen->isKitchenFilled() == false && kitchen->checkPantry(pizza->getIngredients()) == true) {
-            kitchen->addPizzaToPool(pizza);
+        if (kitchen->isKitchenFilled() == false && kitchen->checkPantry(t_pizza->getIngredients()) == true) {
+            kitchen->addPizzaToPool(t_pizza);
             return;
         }
     }
     createKitchen();
-    sendPizzaToKitchen();
+    sendPizzaToKitchen(t_pizza);
 }
