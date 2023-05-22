@@ -110,22 +110,20 @@ std::shared_ptr<IPizza> Parser::setPizza(const std::string &t_pizzaName, const s
  */
 std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> t_inputs)
 {
-    unsigned long i = 0;
-    int nbPizzas = 0;
+    unsigned int nbPizzas = 0;
     std::vector<std::shared_ptr<IPizza>> pizzas;
     std::shared_ptr<IPizza> pizza;
 
     if (t_inputs.empty())
         return {};
-    while (i < t_inputs.size()) {
+    for (size_t i = 0; i < t_inputs.size(); i+=3) {
         pizza = setPizza(t_inputs[i], t_inputs[i + 1]);
         for (size_t j = 0; j < t_inputs[i + 2].size(); j++) {
             if (isdigit(t_inputs[i + 2][j]))
-                nbPizzas = std::stoi(t_inputs[i + 2].substr(j, t_inputs[i + 2].size()));
+                nbPizzas = strtoul(t_inputs[i + 2].substr(j, t_inputs[i + 2].size()).c_str(), NULL, 0);
         }
-        for (int j = 0; j < nbPizzas; j++)
+        for (size_t j = 0; j < nbPizzas; j++)
             pizzas.push_back(pizza);
-        i += 3;
     }
     return pizzas;
 }
