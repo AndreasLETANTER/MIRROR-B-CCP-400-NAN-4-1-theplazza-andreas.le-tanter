@@ -33,6 +33,10 @@ Also, you can run this to get help:
 ```bash
 ./plazza
 ```
+or
+```bash
+./plazza -h
+```
 ## Example
 ```bash
 ./plazza 2 5 2000
