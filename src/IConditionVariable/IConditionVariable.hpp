@@ -15,9 +15,23 @@
 */
 class IConditionVariable {
     public:
+        /**
+         * @brief Destroy the IConditionVariable object
+        */
         virtual ~IConditionVariable() = default;
+        /**
+         * @brief Wait for a condition to be true
+         * @details Wait for a condition to be true and lock the mutex passed as parameter
+         * @param t_lock 
+        */
         virtual void wait(std::unique_lock<std::mutex> &t_lock) = 0;
+        /**
+         * @brief Notify one thread
+        */
         virtual void notify_one() = 0;
+        /**
+         * @brief Notify all threads
+        */
         virtual void notify_all() = 0;
 
     protected:
