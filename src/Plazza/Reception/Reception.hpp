@@ -51,9 +51,8 @@ class Reception : public IReception {
 
     protected:
     private:
-        std::shared_ptr<IPizza> *m_sharedPizza;
-        boost::interprocess::managed_shared_memory m_Segment;
         boost::interprocess::interprocess_mutex m_mutex =  boost::interprocess::interprocess_mutex();
+        std::unique_ptr<ISharedMemory<std::shared_ptr<IPizza>>> m_sharedMemory;
         bool m_is_running;
         std::string m_command;
         std::fstream m_file;

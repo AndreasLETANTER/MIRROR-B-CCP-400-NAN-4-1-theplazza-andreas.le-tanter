@@ -18,7 +18,7 @@ class ISharedMemory {
         virtual void constructSegment(std::string t_segmentName) = 0;
         virtual void destroySegment(std::string t_segmentName) = 0;
         virtual void destroySharedMemory(std::string t_memoryName) = 0;
-        virtual T getSegment(std::string t_segmentName) = 0;
+        virtual T *getSegment(std::string t_segmentName) = 0;
 
     protected:
     private:

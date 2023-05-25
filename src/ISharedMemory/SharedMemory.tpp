@@ -48,7 +48,7 @@ void SharedMemory<T>::destroySharedMemory(std::string t_memoryName)
 }
 
 template<typename T>
-T SharedMemory<T>::getSegment(std::string t_segmentName)
+T *SharedMemory<T>::getSegment(std::string t_segmentName)
 {
     return (m_segment.find<T>(t_segmentName.c_str()).first);
 }

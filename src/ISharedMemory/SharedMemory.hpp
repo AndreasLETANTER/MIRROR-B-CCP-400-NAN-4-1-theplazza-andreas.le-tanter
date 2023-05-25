@@ -19,7 +19,7 @@ class SharedMemory : public ISharedMemory<T> {
         void constructSegment(std::string t_segmentName) override;
         void destroySegment(std::string t_segmentName) override;
         void destroySharedMemory(std::string t_memoryName) override;
-        T getSegment(std::string t_segmentName) override;
+        T *getSegment(std::string t_segmentName) override;
 
     protected:
     private:

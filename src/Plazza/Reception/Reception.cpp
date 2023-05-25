@@ -27,8 +27,8 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
     m_nbCooks = nbCooks;
     m_refillTime = refillTime;
     m_file.open("Pizza.log", std::ios::out);
-    m_Segment = boost::interprocess::managed_shared_memory(boost::interprocess::open_or_create, "SharedMemory", 65536);
-    m_sharedPizza = m_Segment.construct<std::shared_ptr<IPizza>>("SharedPizza")(nullptr);
+    m_sharedMemory = std::make_unique<SharedMemory<std::shared_ptr<IPizza>>>("SharedMemory", 65536);
+    m_sharedMemory->constructSegment("SharedPizza");
     waitCommands();
 }
 
@@ -39,8 +39,6 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
 Reception::~Reception()
 {
     m_file.close();
-    m_Segment.destroy<std::shared_ptr<IKitchen>>("SharedPizza");
-    boost::interprocess::shared_memory_object::remove("SharedMemory");
 }
 
 /**
@@ -90,7 +88,7 @@ void Reception::createKitchen()
         m_mutex.unlock();
         while (kitchen->isExitNeeded() == false) {
             m_mutex.lock();
-            std::shared_ptr<IPizza>* pizza = m_Segment.find<std::shared_ptr<IPizza>>("SharedPizza").first;
+            std::shared_ptr<IPizza>* pizza = m_sharedMemory->getSegment("SharedPizza");
             if ((*pizza) != nullptr && kitchen->isKitchenFilled() == false && kitchen->checkPantry((*pizza)->getIngredients()) == true) {
                 std::shared_ptr<IPizza> pizzaToCook = (*pizza);
                 std::cout << "Pizza " << pizzaToCook->getType() << " is cooking" << std::endl;
@@ -108,10 +106,10 @@ void Reception::createKitchen()
 void Reception::sendPizzaToKitchen(std::shared_ptr<IPizza> t_pizza)
 {
     m_mutex.lock();
-    std::shared_ptr<IPizza>* pizza = m_Segment.find<std::shared_ptr<IPizza>>("SharedPizza").first;
+    std::shared_ptr<IPizza>* pizza = m_sharedMemory->getSegment("SharedPizza");
 
     *pizza = t_pizza;
-    if (m_Segment.find<std::shared_ptr<IPizza>>("SharedPizza").first == nullptr) {
+    if (m_sharedMemory->getSegment("SharedPizza") == nullptr) {
         m_mutex.unlock();
         return;
     }
