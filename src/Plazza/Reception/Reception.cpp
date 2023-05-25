@@ -44,7 +44,7 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
     m_multiplier = multiplier;
     m_nbCooks = nbCooks;
     m_refillTime = refillTime;
-    // m_file.open("Pizza.log", std::ios::out);
+    m_file.open("Pizza.log", std::ios::out);
     m_sharedMemory = std::make_unique<SharedMemory<std::shared_ptr<IPizza>>>("SharedMemory", 65536);
     m_sharedMemory->constructSegment("SharedPizza");
     waitCommands();
@@ -75,11 +75,6 @@ void Reception::waitCommands()
             break;
         }
         pizzas = parser.getInput();
-        if (pizzas.empty() == true) {
-            std::cout << "Bye ! I hope you enjoyed your pizza !" << std::endl;
-            m_is_running = false;
-            continue;
-        }
         for (auto &i : pizzas) {
             savePizzaToLog(i);
             usleep(800);

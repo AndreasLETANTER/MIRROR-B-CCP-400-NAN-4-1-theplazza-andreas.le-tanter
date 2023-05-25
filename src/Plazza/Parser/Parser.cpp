@@ -139,8 +139,6 @@ std::vector<std::shared_ptr<IPizza>> Parser::getInput()
     std::string inputParam;
     std::vector<std::string> authorized_inputs;
 
-    if (std::cin.eof())
-        return std::vector<std::shared_ptr<IPizza>>();
     std::getline(std::cin, input);
     for (size_t i = 0; i < input.size();) {
         inputParam = getInputString(input, &i);
