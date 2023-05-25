@@ -9,6 +9,7 @@
 #include "../Parser/Parser.hpp"
 #include "../Kitchen/Kitchen.hpp"
 #include "../Pizza/Regina/ReginaPizza.hpp"
+#include "../../Error/Error.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -99,7 +100,7 @@ void Reception::createKitchen()
         }
         exit(0);
     } else if (pid == -1) {
-        std::cerr << "Error while creating kitchen" << std::endl;
+        throw Error("Reception: Error while creating kitchen");
     }
 }
 

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include "Plazza/Reception/Reception.hpp"
+#include "Error/Error.hpp"
 
 #define EXIT_SUCCESS 0
 #define EXIT_ERROR 84
@@ -55,6 +56,11 @@ int main(const int ac, const char **av)
         std::cerr << "Arguments must be positive" << std::endl;
         return EXIT_ERROR;
     }
-    Reception reception(multiplier, number_of_cooks, refilling_time);
+    try {
+        Reception reception(multiplier, number_of_cooks, refilling_time);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        return EXIT_ERROR;
+    }
     return EXIT_SUCCESS;
 }
