@@ -56,6 +56,7 @@ void Reception::waitCommands()
         pizzas = parser.getInput();
         for (auto &i : pizzas) {
             savePizzaToLog(i);
+            usleep(800);
             sendPizzaToKitchen(i);
         }
     }
