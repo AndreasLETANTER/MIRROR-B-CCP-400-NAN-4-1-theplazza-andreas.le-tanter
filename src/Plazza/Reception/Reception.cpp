@@ -26,6 +26,9 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
     m_nbCooks = nbCooks;
     m_refillTime = refillTime;
     m_file.open("Pizza.log", std::ios::out);
+    m_Segment = boost::interprocess::managed_shared_memory(boost::interprocess::open_or_create, "SharedMemory", 65536);
+    const m_ShmemAllocator alloc_inst(m_Segment.get_segment_manager());
+    m_sharedKitchensVector = m_Segment.construct<m_SharedVector>("KitchensVector")(alloc_inst);
     waitCommands();
 }
 
@@ -36,6 +39,8 @@ Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refil
 Reception::~Reception()
 {
     m_file.close();
+    m_Segment.destroy<m_SharedVector>("KitchensVector");
+    boost::interprocess::shared_memory_object::remove("SharedMemory");
 }
 
 /**
@@ -80,7 +85,10 @@ void Reception::createKitchen()
     pid_t pid = fork();
 
     if (pid == 0) {
-        m_kitchens.push_back(std::make_shared<Kitchen>(m_nbCooks, m_multiplier, m_refillTime));
+        m_mutex.lock();
+        m_SharedVector* childVector = m_Segment.find<m_SharedVector>("KitchensVector").first;
+        childVector->push_back(std::make_unique<Kitchen>(m_nbCooks, m_multiplier, m_refillTime));
+        m_mutex.unlock();
         exit(0);
     } else if (pid == -1) {
         std::cerr << "Error while creating kitchen" << std::endl;
@@ -89,12 +97,17 @@ void Reception::createKitchen()
 
 void Reception::sendPizzaToKitchen(std::shared_ptr<IPizza> t_pizza)
 {
-    for (auto &kitchen : m_kitchens) {
+    m_mutex.lock();
+    m_sharedKitchensVector = m_Segment.find<m_SharedVector>("KitchensVector").first;
+
+    for (auto &kitchen : *m_sharedKitchensVector) {
         if (kitchen->isKitchenFilled() == false && kitchen->checkPantry(t_pizza->getIngredients()) == true) {
             kitchen->addPizzaToPool(t_pizza);
+            m_mutex.unlock();
             return;
         }
     }
+    m_mutex.unlock();
     createKitchen();
     sendPizzaToKitchen(t_pizza);
 }
