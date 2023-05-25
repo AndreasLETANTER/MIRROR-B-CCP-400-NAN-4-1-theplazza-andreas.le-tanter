@@ -72,6 +72,8 @@ void Reception::waitCommands()
         if (gSignalStatus == SIGINT) {
             std::cout << "Bye ! I hope you enjoyed your pizza !" << std::endl;
             m_is_running = false;
+            m_sharedMemory->destroySegment("SharedPizza");
+            m_sharedMemory->destroySharedMemory("SharedMemory");
             break;
         }
         pizzas = parser.getInput();
