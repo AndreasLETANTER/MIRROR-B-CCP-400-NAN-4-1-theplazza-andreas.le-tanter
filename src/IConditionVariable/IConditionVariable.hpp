@@ -9,6 +9,10 @@
 #include <mutex>
 #include <condition_variable>
 
+/**
+ * @brief Interface for condition variable
+ * @details Used to wait for a condition to be true
+*/
 class IConditionVariable {
     public:
         virtual ~IConditionVariable() = default;
