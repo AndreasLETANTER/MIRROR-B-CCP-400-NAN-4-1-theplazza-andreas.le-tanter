@@ -12,6 +12,7 @@ set(SRC
     src/Timer/Timer.cpp
     src/IMutex/Mutex.cpp
     src/IConditionVariable/ConditionVariable.cpp
+    src/Error/Error.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Parser/Parser.cpp
     src/Plazza/Reception/Reception.cpp
