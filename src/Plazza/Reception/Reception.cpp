@@ -13,6 +13,19 @@
 #include <iostream>
 #include <unistd.h>
 
+volatile sig_atomic_t gSignalStatus = 0;
+
+/**
+ * @brief signal handler
+ * @details this function is used to handle the signal
+ * @param signum the signal
+ * @return void
+*/
+static void signalHandler(int signum)
+{
+    gSignalStatus = signum;
+}
+
 /**
  * @brief Construct a new Reception:: Reception object
  * @details this function create the mutex, the queue and open the file 
@@ -23,6 +36,10 @@
 Reception::Reception(double multiplier, unsigned int nbCooks, unsigned int refillTime)
 {
     m_is_running = true;
+    sigemptyset(&m_sa.sa_mask);
+    m_sa.sa_flags = 0;
+    m_sa.sa_handler = signalHandler;
+    sigaction(SIGINT, &m_sa, nullptr);
     m_multiplier = multiplier;
     m_nbCooks = nbCooks;
     m_refillTime = refillTime;
@@ -53,6 +70,10 @@ void Reception::waitCommands()
     std::vector<std::shared_ptr<IPizza>> pizzas;
 
     while (m_is_running) {
+        if (gSignalStatus == SIGINT) {
+            m_is_running = false;
+            break;
+        }
         pizzas = parser.getInput();
         for (auto &i : pizzas) {
             savePizzaToLog(i);

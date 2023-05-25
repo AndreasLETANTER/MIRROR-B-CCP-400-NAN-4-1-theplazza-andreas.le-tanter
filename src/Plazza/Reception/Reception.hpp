@@ -15,6 +15,7 @@
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/containers/vector.hpp>
 #include <fstream>
+#include <signal.h>
 
 /**
  * @brief Interface for the reception class
@@ -62,4 +63,5 @@ class Reception : public IReception {
         double m_multiplier;
         unsigned int m_nbCooks;
         unsigned int m_refillTime;
+        struct sigaction m_sa;
 };
