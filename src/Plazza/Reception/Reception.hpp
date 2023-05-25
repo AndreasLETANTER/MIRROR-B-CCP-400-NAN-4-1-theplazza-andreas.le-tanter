@@ -53,10 +53,7 @@ class Reception : public IReception {
 
     protected:
     private:
-        typedef boost::interprocess::allocator<bool, boost::interprocess::managed_shared_memory::segment_manager> m_ShmemAllocator;
-        typedef boost::interprocess::vector<bool, m_ShmemAllocator> m_SharedVector;
-        m_SharedVector* m_sharedKitchensVector;
-        std::shared_ptr<IKitchen> *m_sharedPizza;
+        std::shared_ptr<IPizza> *m_sharedPizza;
         boost::interprocess::managed_shared_memory m_Segment;
         boost::interprocess::interprocess_mutex m_mutex =  boost::interprocess::interprocess_mutex();
         bool m_is_running;
@@ -65,5 +62,4 @@ class Reception : public IReception {
         double m_multiplier;
         unsigned int m_nbCooks;
         unsigned int m_refillTime;
-        size_t m_nbKitchens;
 };
