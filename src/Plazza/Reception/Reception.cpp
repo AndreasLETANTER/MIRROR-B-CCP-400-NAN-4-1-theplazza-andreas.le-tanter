@@ -96,7 +96,7 @@ void Reception::savePizzaToLog(std::shared_ptr<IPizza> pizza)
     try {
         m_file << "Pizza type : " << pizza->getType() << " size : " << pizza->getSize() << std::endl;
     } catch (std::exception &e) {
-        std::cerr << e.what() << std::endl;
+        throw Error("Reception: Error while saving pizza to log : " + std::string(e.what()));
     }
 }
 
