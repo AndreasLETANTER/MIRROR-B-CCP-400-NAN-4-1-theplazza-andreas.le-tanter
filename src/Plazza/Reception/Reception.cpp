@@ -8,6 +8,7 @@
 #include "Reception.hpp"
 #include "../Parser/Parser.hpp"
 #include "../Kitchen/Kitchen.hpp"
+#include "../Pizza/Regina/ReginaPizza.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -89,12 +90,11 @@ void Reception::createKitchen()
         while (kitchen->isExitNeeded() == false) {
             m_mutex.lock();
             std::shared_ptr<IPizza>* pizza = m_Segment.find<std::shared_ptr<IPizza>>("SharedPizza").first;
-            if (pizza && kitchen->isKitchenFilled() == false && kitchen->checkPantry((*pizza)->getIngredients()) == true) {
-                std::shared_ptr<IPizza> pizzaToCook = *pizza;
+            if ((*pizza) != nullptr && kitchen->isKitchenFilled() == false && kitchen->checkPantry((*pizza)->getIngredients()) == true) {
+                std::shared_ptr<IPizza> pizzaToCook = (*pizza);
                 std::cout << "Pizza " << pizzaToCook->getType() << " is cooking" << std::endl;
                 kitchen->addPizzaToPool(pizzaToCook);
                 *pizza = nullptr;
-                //*pizza->reset();
             }
             m_mutex.unlock();
         }
