@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <memory>
+
+#include "../Pizza/IPizza.hpp"
+
 /**
  * @brief Interface for the reception class
 */
@@ -19,10 +23,10 @@ class IReception {
         */
         virtual void waitCommands() = 0;
         /**
-         * @brief Send the pizza to the queue
-         * @details this function send the pizza to safe queue for the kitchen
+         * @brief save the pizza into a log file
+         * @param pizza the pizza to save
         */
-        virtual void sendPizzaToQueue() = 0;
+        virtual void savePizzaToLog(std::shared_ptr<IPizza> pizza) = 0;
         /**
          * @brief Create a kitchen
          * @details this function create a kitchen with a cook and a pantry
@@ -31,7 +35,7 @@ class IReception {
         /**
          * @brief send the pizza to be cooked in a kitchen
         */
-       virtual void sendPizzaToKitchen() = 0;
+       virtual void sendPizzaToKitchen(std::shared_ptr<IPizza> pizza) = 0;
 
     protected:
     private:

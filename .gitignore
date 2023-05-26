@@ -36,6 +36,7 @@ CMakeFiles
 CMakeCache.txt
 cmake_install.cmake
 Makefile
+.vscode/
 .bash_history
-.vscode
 ftest
+Pizza.log

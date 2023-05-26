@@ -11,8 +11,11 @@ set(CXX_FLAGS -Wall -Wextra -Werror)
 set(SRC
     src/Timer/Timer.cpp
     src/IMutex/Mutex.cpp
+    src/IConditionVariable/ConditionVariable.cpp
+    src/Error/Error.cpp
     src/IMutex/ScopedLock/ScopedLock.cpp
     src/Plazza/Parser/Parser.cpp
+    src/Plazza/Reception/Reception.cpp
     src/Plazza/Pizza/APizza.cpp
     src/Plazza/Pizza/Margarita/MargaritaPizza.cpp
     src/Plazza/Pizza/Regina/ReginaPizza.cpp

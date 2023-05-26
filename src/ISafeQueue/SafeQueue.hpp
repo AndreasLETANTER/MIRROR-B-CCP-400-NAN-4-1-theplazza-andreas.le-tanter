@@ -8,6 +8,7 @@
 #pragma once
 #include "ISafeQueue.hpp"
 #include "../IMutex/ScopedLock/ScopedLock.hpp"
+#include "../IConditionVariable/ConditionVariable.hpp"
 #include "../IMutex/IMutex.hpp"
 #include "../IMutex/Mutex.hpp"
 #include <queue>
@@ -67,7 +68,7 @@ class SafeQueue : public ISafeQueue<T> {
     private:
         std::queue<T> m_queue;
         std::shared_ptr<IMutex> m_mutex;
-        std::condition_variable m_cond;
+        ConditionVariable m_cond;
 };
 
 #include "SafeQueue.tpp"
