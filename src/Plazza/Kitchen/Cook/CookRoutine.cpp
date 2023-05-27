@@ -9,6 +9,27 @@
 #include <iostream>
 
 /**
+ * @brief Convert a PizzaType to a string
+ * @param t_type the PizzaType to convert
+ * @return the string of the PizzaType
+*/
+std::string pizzaTypeToString(PizzaType t_type)
+{
+    switch (t_type) {
+        case PizzaType::Regina:
+            return "Regina";
+        case PizzaType::Margarita:
+            return "Margarita";
+        case PizzaType::Americana:
+            return "Americana";
+        case PizzaType::Fantasia:
+            return "Fantasia";
+        default:
+            return "Unknown";
+    }
+}
+
+/**
  * @brief Routine for the cook thread
  * @details This function is the routine for the cook thread (the thread that cook the pizza)
  * @param t_timeMultiplier the multiplier for the cooking time
@@ -19,6 +40,7 @@
 void cookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex)
 {
     bool cookWorking = true;
+    PizzaType pizzaType;
 
     while (cookWorking) {
         auto pizza = t_pizzaPool->pop();
@@ -28,6 +50,7 @@ void cookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared
         t_mutex->lock();
         (*t_nbPizzaMax) -= 1;
         t_mutex->unlock();
-        printf("Pizza %d is ready\n", pizza->getType());
+        pizzaType = pizza->getType();
+        printf("%s is ready\n", pizzaTypeToString(pizzaType).c_str());
     }
 }
