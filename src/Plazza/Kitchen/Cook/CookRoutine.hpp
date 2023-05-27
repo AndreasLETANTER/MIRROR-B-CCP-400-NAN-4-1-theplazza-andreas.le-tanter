@@ -17,3 +17,10 @@
  * @param t_mutex the mutex for the number of pizza max
 */
 void cookRoutine(double t_timeMultiplier, std::shared_ptr<ISafeQueue<std::shared_ptr<IPizza>>> t_pizzaPool, size_t *t_nbPizzaMax, std::shared_ptr<IMutex> t_mutex);
+
+/**
+ * @brief Convert a PizzaType to a string
+ * @param type the PizzaType to convert
+ * @return the string of the PizzaType
+*/
+std::string pizzaTypeToString(PizzaType type);
