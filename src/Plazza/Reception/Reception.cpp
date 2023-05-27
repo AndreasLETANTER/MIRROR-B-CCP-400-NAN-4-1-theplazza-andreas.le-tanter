@@ -7,9 +7,8 @@
 
 #include "Reception.hpp"
 #include "../Parser/Parser.hpp"
-#include "../Kitchen/Kitchen.hpp"
-#include "../Pizza/Regina/ReginaPizza.hpp"
 #include "../../Error/Error.hpp"
+#include "../Kitchen/Cook/CookRoutine.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -116,7 +115,7 @@ void Reception::createKitchen()
             std::shared_ptr<IPizza>* pizza = m_sharedMemory->getSegment("SharedPizza");
             if ((*pizza) != nullptr && kitchen->isKitchenFilled() == false && kitchen->checkPantry((*pizza)->getIngredients()) == true) {
                 std::shared_ptr<IPizza> pizzaToCook = (*pizza);
-                std::cout << "Pizza " << pizzaToCook->getType() << " is cooking" << std::endl;
+                std::cout << pizzaTypeToString(pizzaToCook->getType()).c_str() << " is cooking" << std::endl;
                 kitchen->addPizzaToPool(pizzaToCook);
                 *pizza = nullptr;
             }
