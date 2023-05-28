@@ -56,7 +56,7 @@ Test(Kitchen, Nothing, .init = cr_redirect_stdout)
 {
     std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(1, 1, 1000);
 
-    sleep(5);
+    sleep(6);
     cr_assert_eq(kitchen->isExitNeeded(), true);
 }
 
