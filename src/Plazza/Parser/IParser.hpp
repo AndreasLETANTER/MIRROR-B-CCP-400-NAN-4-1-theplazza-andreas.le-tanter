@@ -20,8 +20,7 @@ class IParser {
          * @brief Get the input from the user
          * @details this function get the input from the user and parse it to get the pizza to cook then return a vector of those pizza
         */
-        virtual  std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> getInput() = 0;
-
+        virtual std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> getInput() = 0;
     protected:
     private:
 };
