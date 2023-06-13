@@ -36,7 +36,7 @@ std::string Parser::getInputString(std::string t_input, size_t *t_i)
  */
 bool Parser::isAuthorized(const std::string& t_inputParam)
 {
-    std::regex pattern("x[0-9]");
+    std::regex pattern("x([1-9]{1}|[1-9][0-9])");
 
     for (size_t i = 0; i < m_authorizedPizzas.size(); i++) {
         if (t_inputParam == m_authorizedPizzas[i])
@@ -46,8 +46,9 @@ bool Parser::isAuthorized(const std::string& t_inputParam)
         if (t_inputParam == m_authorizedSizes[i])
             return true;
     }
-    if (std::regex_match(t_inputParam, pattern))
+    if (std::regex_match(t_inputParam, pattern)) {
         return true;
+    }
     return false;
 }
 
