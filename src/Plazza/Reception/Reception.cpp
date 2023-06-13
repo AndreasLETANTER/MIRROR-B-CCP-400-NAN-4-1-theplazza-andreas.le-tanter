@@ -121,6 +121,7 @@ void Reception::createKitchen()
             }
             m_mutex.unlock();
         }
+        kitchen.~shared_ptr();
         exit(0);
     } else if (pid == -1) {
         throw Error("Reception: Error while creating kitchen");
