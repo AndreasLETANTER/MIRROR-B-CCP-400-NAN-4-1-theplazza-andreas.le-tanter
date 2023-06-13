@@ -12,7 +12,13 @@
 #include <memory>
 #include <unistd.h>
 
-Test(Kitchen, Basic_Check_Ingredient)
+static void redirect_all_stdout()
+{
+    cr_redirect_stdout();
+    cr_redirect_stderr();
+}
+
+Test(Kitchen, Basic_Check_Ingredient, .init = redirect_all_stdout)
 {
     std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(5, 5, 5);
     std::vector<PizzaIngredient> ingredientNeeded = {PizzaIngredient::Dough, PizzaIngredient::Tomato, PizzaIngredient::Gruyere, PizzaIngredient::Ham, PizzaIngredient::Mushrooms, PizzaIngredient::Steak, PizzaIngredient::Eggplant, PizzaIngredient::GoatCheese, PizzaIngredient::ChiefLove};
@@ -20,7 +26,7 @@ Test(Kitchen, Basic_Check_Ingredient)
     cr_assert_eq(kitchen->checkPantry(ingredientNeeded), true);
 }
 
-Test(Kitchen, Basic_isKitchenFilled)
+Test(Kitchen, Basic_isKitchenFilled, .init = redirect_all_stdout)
 {
     std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(5, 5, 5);
 
@@ -28,7 +34,7 @@ Test(Kitchen, Basic_isKitchenFilled)
     cr_assert_eq(kitchen->isKitchenFilled(), false);
 }
 
-Test(Kitchen, KitchenFilled)
+Test(Kitchen, KitchenFilled, .init = redirect_all_stdout)
 {
     std::shared_ptr<IKitchen> kitchen = std::make_shared<Kitchen>(0, 0, 5);
 
