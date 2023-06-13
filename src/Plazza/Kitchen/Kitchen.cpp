@@ -5,6 +5,8 @@
 ** Kitchen
 */
 
+#include <iostream>
+
 #include "Kitchen.hpp"
 #include "Cook/CookRoutine.hpp"
 #include "Bodyguard/BodyguardRoutine.hpp"
@@ -55,6 +57,7 @@ Kitchen::Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refill
     createCooks();
     m_pantryThread = std::make_unique<Thread<decltype(pantryRoutine), decltype(m_pantry), decltype(m_refillTime), decltype(m_pantryMutex)>>(pantryRoutine, m_pantry, m_refillTime, m_pantryMutex);
     m_kitchenBodyguard = std::make_unique<Thread<decltype(bodyguardRoutine), decltype(m_cookPool), decltype(&m_kitchenNeedExit), decltype(&m_nbPizza), decltype(m_kitchenMutex)>>(bodyguardRoutine, m_cookPool, &m_kitchenNeedExit, &m_nbPizza, m_kitchenMutex);
+    std::cout << "Oohhh Mama Mia ! there's a line in front of the pizzeria !" << std::endl;
 }
 
 /**
@@ -65,6 +68,7 @@ Kitchen::~Kitchen()
 {
     m_kitchenBodyguard->joinThread();
     m_pantryThread->stopThread();
+    std::cout << "We worked well it's time to close the pizzeria !" << std::endl;
 }
 
 /**
