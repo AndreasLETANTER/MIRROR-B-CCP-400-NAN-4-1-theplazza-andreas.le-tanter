@@ -92,9 +92,33 @@ Test(check_invalid_pizza_number, IsAuthorized)
     cr_assert_eq(parser.isAuthorized(input), false);
 }
 
-Test(check_too_big_pizza_number, IsAuthorized)
+Test(check_two_digits_pizza_number, IsAuthorized)
 {
     std::string input = "x10";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), true);
+}
+
+Test(check_other_two_digits_pizza_number, IsAuthorized)
+{
+    std::string input = "x99";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), true);
+}
+
+Test(check_too_big_pizza_number, IsAuthorized)
+{
+    std::string input = "x100";
+    Parser parser;
+
+    cr_assert_eq(parser.isAuthorized(input), false);
+}
+
+Test(check_too_low_pizza_number, IsAuthorized)
+{
+    std::string input = "x0";
     Parser parser;
 
     cr_assert_eq(parser.isAuthorized(input), false);
