@@ -133,7 +133,7 @@ std::vector<std::shared_ptr<IPizza>> Parser::setPizzas(std::vector<std::string> 
  * @details get input from user, parse it, handle errors and create a vector of shared pointers of IPizza type
  * @return result of setPizza() : vector of shared pointers of IPizza type
  */
-std::vector<std::shared_ptr<IPizza>> Parser::getInput()
+std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> Parser::getInput()
 {
     std::string input;
     std::string inputParam;
@@ -142,12 +142,15 @@ std::vector<std::shared_ptr<IPizza>> Parser::getInput()
     std::getline(std::cin, input);
     for (size_t i = 0; i < input.size();) {
         inputParam = getInputString(input, &i);
+        if (inputParam == "status") {
+            return std::make_pair(std::vector<std::shared_ptr<IPizza>>(), "status");
+        }
         if (isAuthorized(inputParam))
             authorized_inputs.push_back(inputParam);
         else
-            return std::vector<std::shared_ptr<IPizza>>();
+            return std::make_pair(std::vector<std::shared_ptr<IPizza>>(), "error");
         while ((input[i] == ' ' || input[i] == ';') && i < input.size())
             i++;
     }
-    return setPizzas(authorized_inputs);
+    return std::make_pair(setPizzas(authorized_inputs), "OK");
 }

@@ -49,6 +49,7 @@ Kitchen::Kitchen(size_t t_nbCook, double t_timeMultiplier, unsigned int t_refill
 {
     m_nbCook = t_nbCook;
     m_timeMultiplier = t_timeMultiplier;
+    m_nbPizza = 0;
     m_nbPizzaMax = t_nbCook * 2;
     m_refillTime = t_refillTime;
     m_pantryMutex = std::make_shared<Mutex>();
@@ -114,13 +115,12 @@ bool Kitchen::checkPantry(std::vector<PizzaIngredient> t_ingredientNeeded)
 */
 bool Kitchen::isKitchenFilled()
 {
-    size_t nbPizza = 0;
-
     m_kitchenMutex->lock();
-    nbPizza = m_nbPizza;
-    m_kitchenMutex->unlock();
-    if (nbPizza == m_nbPizzaMax)
+    if (m_nbPizza == m_nbPizzaMax) {
+        m_kitchenMutex->unlock();
         return true;
+    }
+    m_kitchenMutex->unlock();
     return false;
 }
 

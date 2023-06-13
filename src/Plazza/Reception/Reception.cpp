@@ -65,7 +65,7 @@ Reception::~Reception()
 void Reception::waitCommands()
 {
     Parser parser;
-    std::vector<std::shared_ptr<IPizza>> pizzas;
+    std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> pizzas;
 
     while (m_is_running) {
         if (gSignalStatus == SIGINT) {
@@ -76,7 +76,7 @@ void Reception::waitCommands()
             break;
         }
         pizzas = parser.getInput();
-        for (auto &i : pizzas) {
+        for (auto &i : pizzas.first) {
             savePizzaToLog(i);
             usleep(800);
             sendPizzaToKitchen(i);

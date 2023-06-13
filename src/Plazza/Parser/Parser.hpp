@@ -18,7 +18,7 @@ public:
      * @details get input from user, parse it, handle errors and create a vector of shared pointers of IPizza type
      * @return result of setPizza() : vector of shared pointers of IPizza type
      */
-    std::vector<std::shared_ptr<IPizza>> getInput() override;
+    std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> getInput() override;
     /**
      * @brief set all pizzas contained in t_inputs
      * @param t_inputs string vector containing all inputs to set pizzas
