@@ -141,7 +141,7 @@ std::pair<std::vector<std::shared_ptr<IPizza>>, std::string> Parser::getInput()
     std::vector<std::string> authorized_inputs;
 
     std::getline(std::cin, input);
-    for (size_t i = 0; i < input.size();) {
+    for (size_t i = 0; i < input.size() - 1;) {
         inputParam = getInputString(input, &i);
         if (inputParam == "status") {
             return std::make_pair(std::vector<std::shared_ptr<IPizza>>(), "status");
